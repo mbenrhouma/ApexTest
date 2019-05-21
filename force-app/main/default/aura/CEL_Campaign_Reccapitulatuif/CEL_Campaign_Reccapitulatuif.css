@@ -1,0 +1,89 @@
+.THIS {
+    background-color: white;
+    width: auto;
+    height: auto;
+    
+}
+
+.THIS img {
+    height: 66px;
+    width:auto;
+}
+
+.THIS .slds-table {
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+.THIS.theTable {
+    background-color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+.THIS .textSpinnerLoading {
+    color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 9051;
+    transform: translate(-50%, -50%);
+    margin-top: 50px;
+}
+
+.THIS .storeHelpText{
+    position: absolute;
+    top: 20px;
+    background-color: #f49756;
+    margin: 5px;
+    padding: 5px;
+    z-index: 20;
+    left: 20px;
+    border-radius: 7px;
+}
+
+.THIS .countryHelpText{
+    position: absolute;
+    top: 20px;
+    background-color: #f49756;
+    margin: 5px;
+    padding: 5px;
+    z-index: 20;
+    left: 20px;
+    border-radius: 7px;
+}
+
+.THIS .hide{
+    display:none;
+}
+
+.THIS .nbColumn-1{
+    columns: 1;
+}
+
+.THIS .nbColumn-2{
+    columns: 2;
+}
+
+.THIS .nbColumn-3{
+    columns: 3;
+}
+
+.THIS .nbColumn-4{
+    columns: 4;
+}
+
+.THIS .nbColumn-5{
+    columns: 5;
+}
+
+.THIS .nbColumn-6{
+    columns: 6;
+}
+
+.THIS .nbColumn-7{
+    columns: 7;
+}
+
+.THIS .nbColumn-8{
+    columns: 8;
+}

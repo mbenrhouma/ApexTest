@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Top_Shirt</fullName>
+    <columns>cel_transcodification_code__c</columns>
+    <columns>NAME</columns>
+    <columns>OBJECT_ID</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>cel_transcodification__c.cel_topshirtsize</value>
+    </filters>
+    <label>Top Shirt</label>
+</ListView>

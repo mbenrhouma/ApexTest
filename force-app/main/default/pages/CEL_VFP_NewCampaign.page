@@ -1,0 +1,10 @@
+<apex:page standardController="Campaign">
+    <flow:interview name="FlowActivate">
+        <apex:param name="vCampID" value="{!Campaign.id}"/>
+        finishLocation="/Campaign.id"
+    </flow:interview>
+<script>
+self.close();
+window.parent.location.href='/{!Campaign.Id}';
+</script>
+</apex:page>

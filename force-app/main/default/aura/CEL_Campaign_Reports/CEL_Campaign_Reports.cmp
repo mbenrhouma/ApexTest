@@ -1,0 +1,34 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" controller="CEL_CampaignReportController">
+    <aura:attribute name="campaignReportIdAction"  type="String" />
+    <aura:attribute name="campaignReportIdMembers"  type="String" />
+    <aura:attribute name="campaignReportIdTransactions"  type="String" />
+    <aura:attribute name="campaignReportIdLines"  type="String" />
+    <aura:attribute name="campaignRecord" type="Object"/>
+    <aura:attribute name="recordInfo" type="Object" />
+    <aura:attribute name="recordError" type="String"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <force:recordData aura:id="recordHandler"
+    recordId="{!v.recordId}"
+    layoutType="FULL"
+    targetRecord="{!v.recordInfo}"
+    targetFields="{!v.campaignRecord}"/>
+    
+    <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+            <lightning:button variant="brand" label="My action" onclick="{!c.openReportCampaignAction}" class="button-report"/>
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+            <lightning:button variant="brand" label="My Campaign Members" onclick="{!c.openReportCampaignMembers}" class="button-report"/>
+        </div>
+    </div>
+    <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2">
+            <lightning:button variant="brand" label="My Transactions" onclick="{!c.openReportCampaignTransactions}" class="button-report"/>
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+            <lightning:button variant="brand" label="My Transactions lines" onclick="{!c.openReportCampaignLines}" class="button-report"/>
+        </div>
+    </div>
+</aura:component>

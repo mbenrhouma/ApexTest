@@ -1,0 +1,31 @@
+.THIS{
+    max-height: 500px;
+}
+
+.THIS div.slds-truncate {
+    text-align: center;
+}
+
+.THIS .field {
+  padding: 5px;
+  border: 1px solid #dce4ec;
+  border-radius: 2px;
+}
+
+.THIS .slds-text-title_caps{
+    letter-spacing: .01rem;
+}
+
+.THIS .buttons{
+    text-align: right;
+}
+
+.THIS .slds-p-horizontal_large{
+    padding-left: 0px;
+}
+
+.THIS .slds-p-horizontal_small.hllo{
+   max-height: 300px;
+   overflow-x: auto;
+   overflow-y: auto;
+}

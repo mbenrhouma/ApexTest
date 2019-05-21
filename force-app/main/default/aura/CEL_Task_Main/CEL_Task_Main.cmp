@@ -1,0 +1,105 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction,lightning:actionOverride" access="global" controller="CEL_TaskMainController">
+    <aura:attribute name="task" type="Task" />
+    <aura:attribute name="hasAccess" type="Boolean" default="false" />
+    
+    <aura:attribute name="recordError" type="String"/>
+    <aura:attribute name="recordInfo" type="Object" />
+    <aura:attribute name="simpleRecord" type="Object"/> 
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="storeList" type="List"  access="global"/>
+    
+    <aura:attribute name="refresh" type="Boolean" default="true" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler event="force:refreshView" action="{!c.doInit}"/>
+    
+    <lightning:notificationsLibrary aura:id="notifLib"/>
+    <aura:if isTrue="{!v.hasAccess}">
+        <div class="slds-section slds-is-open openActivities SMALL runtime_sales_activitiesActivityTimelineFixedLayout" data-aura-rendered-by="5568:0" data-aura-class="runtime_sales_activitiesActivityTimelineFixedLayout">
+            <fieldset class="slds-form-element slds-form_compound">
+                <div class="slds-grid slds-glutters_small">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                            <lightning:input type="text" label="{!$Label.c.cel_task_subject}" value="{!v.task.Subject}" required="true" maxlength="255"/>
+                                        </span>
+                                    </span>     
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        
+            <fieldset class="slds-form-element slds-form_compound">
+                <div class="slds-grid slds-glutters_small">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                            <lightning:input type="date" label="{!$Label.c.cel_task_duedate}" value="{!v.task.ActivityDate}" required="true" />
+                                        </span>
+                                    </span>     
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        
+            <fieldset class="slds-form-element slds-form_compound">
+                <div class="slds-grid slds-glutters_small">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                            <lightning:textarea label="{!$Label.c.cel_task_comments}" value="{!v.task.Description}" />
+                                        </span>
+                                    </span>     
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        
+            <fieldset class="slds-form-element slds-form_compound">
+                <div class="slds-grid slds-glutters_small">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <p class="title">{!$Label.c.cel_task_relatedto}</p>
+                                        <ui:inputSelect multiple="true" class="multiple" aura:id="InputSelectMultipleStores">
+                                            <aura:iteration items="{!v.storeList}" var="store">
+                                                <ui:inputSelectOption aura:id="{!store.value}" text="{!store.value}" label="{!store.label}" value="false"/>
+                                            </aura:iteration>
+                                        </ui:inputSelect>
+                                    </span>     
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        
+            <div align="right">
+                <lightning:button variant="brand" label="Save" onclick="{!c.handleSave}" class="button-portability"/>
+            </div>
+        
+        </div>
+    
+        <aura:set attribute="else">
+            <h1 style="font-weight: bold; color:red; font-size:1.3em" align="center">{!$Label.c.cel_task_create_no_sufficient_rights}</h1>
+        </aura:set>
+    </aura:if>
+
+</aura:component>

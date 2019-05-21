@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Segment</fullName>
+    <columns>cel_transcodification_code__c</columns>
+    <columns>NAME</columns>
+    <columns>cel_transcodification_label1__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>cel_transcodification__c.cel_segment</value>
+    </filters>
+    <label>Segment</label>
+</ListView>

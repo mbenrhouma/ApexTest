@@ -1,0 +1,1409 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="CEL_AccountOtherInformationController">
+	<aura:attribute name="recordError" type="String"/>
+    <aura:attribute name="recordInfo" type="Object" />
+    <aura:attribute name="simpleRecord" type="Object"/>
+    <aura:attribute name="fieldAccess" type="Map" access="global"/>
+    <aura:attribute name="isEditMode" type="Boolean" default="false" />
+    <aura:attribute name="allTrousers" type="List" />
+    <aura:attribute name="allTop" type="List" />
+    <aura:attribute name="allDress" type="List" />
+    <aura:attribute name="allKnitwear" type="List" />
+    <aura:attribute name="allShoes" type="List" />
+    <aura:attribute name="allGeneralStyle" type="List" />
+    <aura:attribute name="allWearing" type="List" />
+    <aura:attribute name="allColourTone" type="List" />
+    <aura:attribute name="allFamilyStatus" type="List" />
+    <aura:attribute name="allChildrenNumber" type="List" />
+    <aura:attribute name="allCountries" type="List" access="global" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />  
+
+    <aura:if isTrue="{!v.isEditMode}">
+        <force:recordData aura:id="recordHandler"
+            recordId="{!v.recordId}"
+            layoutType="FULL"
+            targetRecord="{!v.recordInfo}"  
+            targetFields="{!v.simpleRecord}"
+            mode="EDIT"  
+            fields="cel_professional_activity__c, 
+            cel_family_status__c, 
+            cel_age_range__c, 
+            cel_leisure__c, 
+            cel_children_number__c, 
+            cel_food_beverage_preferences__c, 
+            cel_personal_assistant__c, 
+            cel_personal_shopper_2__c, 
+            cel_personal_shopper_1__c, 
+            cel_personal_shopper_3__c,
+            cel_trousers_skirt_size__c,
+            cel_trousers_skirt_size__c,
+            cel_style__c,
+            cel_top_shirt_size__c,
+            cel_celine_wearing_style__c,
+            cel_dress_jacketcoat_size__c,
+            cel_colourtone__c,
+            cel_knitwear__c,
+            cel_preferred_brands__c,
+            cel_shoes_size__c,
+            cel_comment_pref__c,
+            cel_comment_size_style__c,
+            cel_professional_activity__c,
+            cel_family_status__c,
+            cel_age_range__c,
+            cel_leisure__c,
+            cel_children_number__c,
+            cel_food_beverage_preferences__c,
+            cel_personal_assistant__c,
+            cel_personal_shopper_2__c,
+            cel_personal_shopper_1__c,
+            cel_personal_shopper_3__c,
+            cel_addr_2_line_1__c,
+            cel_addr_2_zipcode__c,
+            cel_addr_3_zipcode__c,
+            cel_addr_4_zipcode__c,
+            cel_addr_2_line_2__c,
+            cel_addr_3_line_2__c,
+            cel_addr_4_line_2__c,
+            cel_addr_3_line_1__c,
+            cel_addr_2_region__c,
+            cel_addr_3_region__c,
+            cel_addr_4_region__c,
+            cel_addr_4_line_1__c,
+            cel_addr_2_line_3__c,
+            cel_addr_3_line_3__c,
+            cel_addr_4_line_3__c,
+            cel_addr_2_city__c,
+            cel_addr_3_city__c,
+            cel_addr_4_city__c,
+            cel_addr_2_country__c,
+            cel_addr_3_country__c,
+            cel_addr_4_country__c,
+            cel_family_status__r.Name,
+            cel_children_number__r.Name,
+            cel_addr_2_country__r.Name,
+            cel_addr_3_country__r.Name,
+            cel_addr_4_country__r.Name"  
+            />
+
+            <!-- Display Lightning Data Service errors, if any -->
+        <aura:if isTrue="{!not(empty(v.recordError))}">
+            <div class="recordError">
+                <ui:message title="Error" severity="error" closable="true">
+                    {!v.recordError}
+                </ui:message>
+            </div>
+        </aura:if>
+        <div class="slds-section slds-is-open openActivities SMALL runtime_sales_activitiesActivityTimelineFixedLayout" data-aura-rendered-by="5568:0" data-aura-class="runtime_sales_activitiesActivityTimelineFixedLayout">
+                <lightning:card iconName="standard:account" title="Other Information">
+                    <div class="slds-section slds-is-open openActivities SMALL runtime_sales_activitiesActivityTimelineFixedLayout" data-aura-rendered-by="5568:0" data-aura-class="runtime_sales_activitiesActivityTimelineFixedLayout">
+                        <fieldset class="slds-form-element slds-form_compound">
+                            <div class="slds-grid slds-glutters_small">
+                                <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                                    <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <span class="test-id__field-value slds-form-element__static slds-grow">
+                                                    <span class="uiOutputText">
+                                                        <lightning:input type="text" label="{!$Label.c.cel_account_professional_activity}" value="{!v.simpleRecord.cel_professional_activity__c}" disabled="{!!v.fieldAccess.professionalActivity}"/>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                                    <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <aura:if isTrue="{!v.fieldAccess.family_status}">
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                                        <span class="uiOutputText">
+                                                        <lightning:select aura:id="CEL_Knitwear" label="{!$Label.c.cel_account_family_status}" value="{!v.simpleRecord.cel_family_status__c}" >
+                                                            <aura:iteration items="{!v.allFamilyStatus}" var="c">    
+                                                                <option value="{!c.value}">{!c.label}</option>
+                                                            </aura:iteration>
+                                                        </lightning:select>
+                                                        </span>
+                                                    </span>
+                                                <aura:set attribute="else">
+                                                    <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_family_status}</label>
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow formattedTextCustom">
+                                                        <span class="uiOutputText">
+                                                            <lightning:formattedText value="{!v.simpleRecord.cel_family_status__r.Name}" />
+                                                        </span>
+                                                    </span>
+                                                </aura:set>
+                                                </aura:if>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="slds-form-element slds-form_compound">
+                            <div class="slds-grid slds-glutters_small">
+                                <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                                    <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <span class="test-id__field-value slds-form-element__static slds-grow">
+                                                    <span class="uiOutputText">
+                                                        <lightning:input type="text" label="{!$Label.c.cel_account_age_range}" value="{!v.simpleRecord.cel_age_range__c}" disabled="{!!v.fieldAccess.ageRange}"/>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                                    <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <span class="test-id__field-value slds-form-element__static slds-grow">
+                                                    <span class="uiOutputText">
+                                                        <lightning:input type="text" label="{!$Label.c.cel_account_leisure}" value="{!v.simpleRecord.cel_leisure__c}" disabled="{!!v.fieldAccess.leisure}"/>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="slds-form-element slds-form_compound">
+                            <div class="slds-grid slds-glutters_small">
+                                <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                                    <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static">
+                                            <aura:if isTrue="{!v.fieldAccess.children_number}">
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                                        <span class="uiOutputText">
+                                                            <lightning:select aura:id="CEL_Knitwear" label="{!$Label.c.cel_account_children_number}" value="{!v.simpleRecord.cel_children_number__c}">
+                                                                <aura:iteration items="{!v.allChildrenNumber}" var="c">    
+                                                                    <option value="{!c.value}">{!c.label}</option>
+                                                                </aura:iteration>
+                                                            </lightning:select>
+                                                        </span>
+                                                    </span>
+                                                <aura:set attribute="else">
+                                                    <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_children_number}</label>
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow formattedTextCustom">
+                                                        <span class="uiOutputText">
+                                                            <lightning:formattedText value="{!v.simpleRecord.cel_children_number__r.Name}" />
+                                                        </span>
+                                                    </span>
+                                                </aura:set>
+                                                </aura:if>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                                    <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <span class="test-id__field-value slds-form-element__static slds-grow">
+                                                    <span class="uiOutputText">
+                                                        <lightning:input type="text" label="{!$Label.c.cel_account_food_beverage_preferences}" value="{!v.simpleRecord.cel_food_beverage_preferences__c}" disabled="{!!v.fieldAccess.foodBeveragePref}"/>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="slds-form-element slds-form_compound">
+                            <div class="slds-grid slds-glutters_small">
+                                <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                                    <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <span class="test-id__field-value slds-form-element__static slds-grow">
+                                                    <span class="uiOutputText">
+                                                        <lightning:input type="text" label="{!$Label.c.cel_account_personal_assistant}" value="{!v.simpleRecord.cel_personal_assistant__c}" disabled="{!!v.fieldAccess.personalAssistant}"/>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                                    <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <span class="test-id__field-value slds-form-element__static slds-grow">
+                                                    <span class="uiOutputText">
+                                                        <lightning:input type="text" label="{!$Label.c.cel_account_personal_shopper_2}" value="{!v.simpleRecord.cel_personal_shopper_2__c}" disabled="{!!v.fieldAccess.personalShopper2}"/>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="slds-form-element slds-form_compound">
+                            <div class="slds-grid slds-glutters_small">
+                                <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                                    <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <span class="test-id__field-value slds-form-element__static slds-grow">
+                                                    <span class="uiOutputText">
+                                                        <lightning:input type="text" label="{!$Label.c.cel_account_personal_shopper_1}" value="{!v.simpleRecord.cel_personal_shopper_1__c}" disabled="{!!v.fieldAccess.personalShopper1}"/>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                                    <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <span class="test-id__field-value slds-form-element__static slds-grow">
+                                                    <span class="uiOutputText">
+                                                        <lightning:input type="text" label="{!$Label.c.cel_account_personal_shopper_3}" value="{!v.simpleRecord.cel_personal_shopper_3__c}" disabled="{!!v.fieldAccess.personalShopper3}"/>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <lightning:layout horizontalAlign="center" class="slds-m-top_large">
+                            <div class="slds-align--absolute-center">
+                                <button type="button" class="slds-button slds-button--neutral slds-m-around--medium" onclick="{!c.handleCancel}" aura:id="btnCancel">
+                                {!$Label.c.cel_cancel}
+                                </button> 
+                                <button type="submit" class="slds-button slds-button--brand slds-m-around--medium"  aura:id="btnSave" onclick="{!c.handleSave}">
+                                {!$Label.c.cel_save}
+                                </button>
+                            </div> 
+                        </lightning:layout>
+                    </div>
+                </lightning:card>    
+
+
+             <!--ADDRESS-->
+             <lightning:card iconName="standard:account" title="Address 2">
+                    <div class="slds-section slds-is-open openActivities SMALL runtime_sales_activitiesActivityTimelineFixedLayout" data-aura-rendered-by="5568:0" data-aura-class="runtime_sales_activitiesActivityTimelineFixedLayout">
+                       <fieldset class="slds-form-element slds-form_compound">
+                            <div class="slds-grid slds-glutters_small">
+                                <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                                    <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <span class="test-id__field-value slds-form-element__static slds-grow">
+                                                    <span class="uiOutputText">
+                                                        <lightning:input type="text" label="{!$Label.c.cel_account_addr_2_line_1}" value="{!v.simpleRecord.cel_addr_2_line_1__c}"  disabled="{!!v.fieldAccess.addr2Line1}"/>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                                    <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <span class="test-id__field-value slds-form-element__static slds-grow">
+                                                    <span class="uiOutputText">
+                                                        <lightning:input type="text" label="{!$Label.c.cel_account_addr_2_zipcode}" value="{!v.simpleRecord.cel_addr_2_zipcode__c}" disabled="{!!v.fieldAccess.addr2Zipcode}"/>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset> 
+                        <fieldset class="slds-form-element slds-form_compound">
+                            <div class="slds-grid slds-glutters_small">
+                                <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                                    <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <span class="test-id__field-value slds-form-element__static slds-grow">
+                                                    <span class="uiOutputText">
+                                                        <lightning:input type="text" label="{!$Label.c.cel_account_addr_2_line_2}" value="{!v.simpleRecord.cel_addr_2_line_2__c}" disabled="{!!v.fieldAccess.addr2Line2}"/>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                                    <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <span class="test-id__field-value slds-form-element__static slds-grow">
+                                                    <span class="uiOutputText">
+                                                        <lightning:input type="text" label="{!$Label.c.cel_account_addr_2_region}" value="{!v.simpleRecord.cel_addr_2_region__c}" disabled="{!!v.fieldAccess.addr2Region}"/>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="slds-form-element slds-form_compound">
+                            <div class="slds-grid slds-glutters_small">
+                                <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                                    <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <span class="test-id__field-value slds-form-element__static slds-grow">
+                                                    <span class="uiOutputText">
+                                                        <lightning:input type="text" label="{!$Label.c.cel_account_addr_2_line_3}" value="{!v.simpleRecord.cel_addr_2_line_3__c}" disabled="{!!v.fieldAccess.addr2Line3}"/>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                                    <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <span class="test-id__field-value slds-form-element__static slds-grow">
+                                                    <span class="uiOutputText">
+                                                        <lightning:input type="text" label="{!$Label.c.cel_account_addr_2_city}" value="{!v.simpleRecord.cel_addr_2_city__c}" disabled="{!!v.fieldAccess.addr2City}"/>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="slds-form-element slds-form_compound">
+                            <div class="slds-grid slds-glutters_small">
+                                <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                                    <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__static">
+                                                <aura:if isTrue="{!v.fieldAccess.addr2Country}">
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow">                                                       
+                                                        <span class="uiOutputText">
+                                                            <lightning:select aura:id="CEL_Countries" label="{!$Label.c.cel_account_addr_2_country}" value="{!v.simpleRecord.cel_addr_2_country__c}">
+                                                                <aura:iteration items="{!v.allCountries}" var="c">    
+                                                                    <option value="{!c.value}">{!c.label}</option>
+                                                                </aura:iteration>
+                                                            </lightning:select>    
+                                                        </span>
+                                                    </span>
+                                                <aura:set attribute="else">
+                                                    <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_2_country}</label>
+                                                    <span class="test-id__field-value slds-form-element__static slds-grow formattedTextCustom">
+                                                        <span class="uiOutputText">
+                                                            <lightning:formattedText value="{!v.simpleRecord.cel_addr_2_country__r.Name}" />
+                                                        </span>
+                                                    </span>
+                                                </aura:set>
+                                                </aura:if>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <lightning:layout horizontalAlign="center" class="slds-m-top_large">
+                            <div class="slds-align--absolute-center">
+                                <button type="button" class="slds-button slds-button--neutral slds-m-around--medium" onclick="{!c.handleCancel}" aura:id="btnCancel">
+                                {!$Label.c.cel_cancel}
+                                </button> 
+                                <button type="submit" class="slds-button slds-button--brand slds-m-around--medium"  aura:id="btnSave" onclick="{!c.handleSave}">
+                                {!$Label.c.cel_save}
+                                </button>
+                            </div> 
+                    </lightning:layout>
+                </lightning:card>
+                
+ <!--ADDRESS-->
+ <lightning:card iconName="standard:account" title="Address 3">
+        <div class="slds-section slds-is-open openActivities SMALL runtime_sales_activitiesActivityTimelineFixedLayout" data-aura-rendered-by="5568:0" data-aura-class="runtime_sales_activitiesActivityTimelineFixedLayout">
+           <fieldset class="slds-form-element slds-form_compound">
+                <div class="slds-grid slds-glutters_small">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                            <lightning:input type="text" label="{!$Label.c.cel_account_addr_3_line_1}" value="{!v.simpleRecord.cel_addr_3_line_1__c}" disabled="{!!v.fieldAccess.addr3Line1}"/>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                            <lightning:input type="text" label="{!$Label.c.cel_account_addr_3_zipcode}" value="{!v.simpleRecord.cel_addr_3_zipcode__c}" disabled="{!!v.fieldAccess.addr3Zipcode}"/>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset> 
+            <fieldset class="slds-form-element slds-form_compound">
+                <div class="slds-grid slds-glutters_small">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                            <lightning:input type="text" label="{!$Label.c.cel_account_addr_3_line_2}" value="{!v.simpleRecord.cel_addr_3_line_2__c}" disabled="{!!v.fieldAccess.addr3Line2}"/>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                            <lightning:input type="text" label="{!$Label.c.cel_account_addr_3_region}" value="{!v.simpleRecord.cel_addr_3_region__c}" disabled="{!!v.fieldAccess.addr3Region}"/>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="slds-form-element slds-form_compound">
+                <div class="slds-grid slds-glutters_small">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                                <lightning:input type="text" label="{!$Label.c.cel_account_addr_3_line_3}" value="{!v.simpleRecord.cel_addr_3_line_3__c}" disabled="{!!v.fieldAccess.addr3Line3}"/>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                            <lightning:input type="text" label="{!$Label.c.cel_account_addr_3_city}" value="{!v.simpleRecord.cel_addr_3_city__c}" disabled="{!!v.fieldAccess.addr3City}"/>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="slds-form-element slds-form_compound">
+                <div class="slds-grid slds-glutters_small">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static">
+                                    <aura:if isTrue="{!v.fieldAccess.addr3Country}">
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:select aura:id="CEL_Countries" label="{!$Label.c.cel_account_addr_3_country}" value="{!v.simpleRecord.cel_addr_3_country__c}">
+                                                    <aura:iteration items="{!v.allCountries}" var="c">    
+                                                        <option value="{!c.value}">{!c.label}</option>
+                                                    </aura:iteration>
+                                                </lightning:select>    
+                                            </span>
+                                        </span>
+                                    <aura:set attribute="else">
+                                        <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_3_country}</label>
+                                        <span class="test-id__field-value slds-form-element__static slds-grow formattedTextCustom">
+                                            <span class="uiOutputText">
+                                                <lightning:formattedText value="{!v.simpleRecord.cel_addr_3_country__r.Name}" />
+                                            </span>
+                                        </span>
+                                    </aura:set>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <lightning:layout horizontalAlign="center" class="slds-m-top_large">
+                <div class="slds-align--absolute-center">
+                    <button type="button" class="slds-button slds-button--neutral slds-m-around--medium" onclick="{!c.handleCancel}" aura:id="btnCancel">
+                    {!$Label.c.cel_cancel}
+                    </button> 
+                    <button type="submit" class="slds-button slds-button--brand slds-m-around--medium"  aura:id="btnSave" onclick="{!c.handleSave}">
+                    {!$Label.c.cel_save}
+                    </button>
+                </div> 
+        </lightning:layout>
+    </lightning:card>   
+    
+     <!--ADDRESS-->
+     <lightning:card iconName="standard:account" title="Address 4">
+            <div class="slds-section slds-is-open openActivities SMALL runtime_sales_activitiesActivityTimelineFixedLayout" data-aura-rendered-by="5568:0" data-aura-class="runtime_sales_activitiesActivityTimelineFixedLayout">
+               <fieldset class="slds-form-element slds-form_compound">
+                    <div class="slds-grid slds-glutters_small">
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static">
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:input type="text" label="{!$Label.c.cel_account_addr_4_line_1}" value="{!v.simpleRecord.cel_addr_4_line_1__c}" disabled="{!!v.fieldAccess.addr4Line1}"/>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static">
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:input type="text" label="{!$Label.c.cel_account_addr_4_zipcode}" value="{!v.simpleRecord.cel_addr_4_zipcode__c}" disabled="{!!v.fieldAccess.addr4Zipcode}"/>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset> 
+                <fieldset class="slds-form-element slds-form_compound">
+                    <div class="slds-grid slds-glutters_small">
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static">
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:input type="text" label="{!$Label.c.cel_account_addr_4_line_2}" value="{!v.simpleRecord.cel_addr_4_line_2__c}" disabled="{!!v.fieldAccess.addr4Line2}"/>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static">
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:input type="text" label="{!$Label.c.cel_account_addr_4_region}" value="{!v.simpleRecord.cel_addr_4_region__c}" disabled="{!!v.fieldAccess.addr4Region}"/>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="slds-form-element slds-form_compound">
+                    <div class="slds-grid slds-glutters_small">
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static">
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:input type="text" label="{!$Label.c.cel_account_addr_4_line_3}" value="{!v.simpleRecord.cel_addr_4_line_3__c}" disabled="{!!v.fieldAccess.addr4Line3}"/>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static">
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:input type="text" label="{!$Label.c.cel_account_addr_4_city}" value="{!v.simpleRecord.cel_addr_4_city__c}" disabled="{!!v.fieldAccess.addr4City}"/>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="slds-form-element slds-form_compound">
+                    <div class="slds-grid slds-glutters_small">
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static">
+                                        <aura:if isTrue="{!v.fieldAccess.addr4Country}">
+                                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                                <span class="uiOutputText">
+                                                    <lightning:select aura:id="CEL_Countries" label="{!$Label.c.cel_account_addr_4_country}" value="{!v.simpleRecord.cel_addr_4_country__c}" >
+                                                        <aura:iteration items="{!v.allCountries}" var="c">    
+                                                            <option value="{!c.value}">{!c.label}</option>
+                                                        </aura:iteration>
+                                                    </lightning:select>    
+                                                </span>
+                                            </span>
+                                        <aura:set attribute="else">
+                                            <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_4_country}</label>
+                                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                                <span class="uiOutputText">
+                                                    <lightning:formattedText value="{!v.simpleRecord.cel_addr_4_country__r.Name}" />
+                                                </span>
+                                            </span>
+                                        </aura:set>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <lightning:layout horizontalAlign="center" class="slds-m-top_large">
+                    <div class="slds-align--absolute-center">
+                        <button type="button" class="slds-button slds-button--neutral slds-m-around--medium" onclick="{!c.handleCancel}" aura:id="btnCancel">
+                        {!$Label.c.cel_cancel}
+                        </button> 
+                        <button type="submit" class="slds-button slds-button--brand slds-m-around--medium"  aura:id="btnSave" onclick="{!c.handleSave}">
+                        {!$Label.c.cel_save}
+                        </button>
+                    </div> 
+            </lightning:layout>
+        </lightning:card>  
+            </div>
+
+    <aura:set attribute="else">
+        <force:recordData aura:id="recordLoader"
+                            recordId="{!v.recordId}"
+                            layoutType="FULL"                      
+                            targetRecord="{!v.recordInfo}"                        
+                            targetFields="{!v.simpleRecord}"    
+                            targetError="{!v.recordError}"
+                            fields="cel_knitwear__r.Name,cel_family_status__r.Name,cel_children_number__r.Name,cel_shoes_size__r.Name,cel_dress_jacketcoat_size__r.Name,cel_celine_wearing_style__r.Name,cel_top_shirt_size__r.Name,cel_style__r.Name,cel_trousers_skirt_size__r.Name,cel_professional_activity__c, cel_family_status__c, cel_age_range__c, cel_leisure__c, cel_children_number__c, cel_food_beverage_preferences__c, 
+            cel_personal_assistant__c, cel_personal_shopper_2__c, cel_personal_shopper_1__c, cel_personal_shopper_3__c,cel_trousers_skirt_size__c,cel_trousers_skirt_size__c,cel_style__c,cel_top_shirt_size__c,cel_celine_wearing_style__c,cel_dress_jacketcoat_size__c,cel_colourtone__c,cel_knitwear__c,cel_preferred_brands__c,cel_shoes_size__c,cel_comment_pref__c,cel_comment_size_style__c,cel_addr_2_zipcode__c,cel_addr_3_zipcode__c,cel_addr_4_zipcode__c,
+            cel_addr_2_line_2__c,cel_addr_3_line_2__c,cel_addr_4_line_2__c,
+            cel_addr_2_region__c,cel_addr_3_region__c,cel_addr_4_region__c,cel_addr_3_line_1__c,cel_addr_2_line_1__c,
+            cel_addr_2_line_3__c,cel_addr_3_line_3__c,cel_addr_4_line_3__c,cel_addr_4_line_1__c,
+            cel_addr_2_city__c,cel_addr_3_city__c,cel_addr_4_city__c,
+            cel_addr_2_country__r.Name,cel_addr_3_country__r.Name,cel_addr_4_country__r.Name,
+            cel_professional_activity__c,cel_family_status__c,cel_age_range__c,cel_leisure__c,cel_children_number__c,cel_food_beverage_preferences__c,cel_personal_assistant__c,cel_personal_shopper_2__c,cel_personal_shopper_1__c,cel_personal_shopper_3__c"
+                            />
+
+
+        <!--OTHER INFORMATION-->
+        <lightning:card iconName="standard:account" title="Other Information">
+            <div class="slds-section slds-is-open openActivities SMALL runtime_sales_activitiesActivityTimelineFixedLayout" data-aura-rendered-by="5568:0" data-aura-class="runtime_sales_activitiesActivityTimelineFixedLayout">
+                <fieldset class="slds-form-element slds-form_compound">
+                    <div class="slds-grid slds-glutters_small">
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static slds-form-element_readonly">
+                                        <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_professional_activity}</label>
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:formattedText value="{!v.simpleRecord.cel_professional_activity__c}" />
+                                            </span>
+                                        </span>
+                                        <aura:if isTrue="{!v.fieldAccess.professionalActivity}">
+                                            <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                                <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                            </button>
+                                        </aura:if> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static slds-form-element_readonly">
+                                        <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_family_status}</label>
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:formattedText value="{!v.simpleRecord.cel_family_status__r.Name}" />
+                                            </span>
+                                        </span>
+                                        <aura:if isTrue="{!v.fieldAccess.family_status}">
+                                            <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                                <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                            </button>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+    
+                <fieldset class="slds-form-element slds-form_compound">
+                    <div class="slds-grid slds-glutters_small">
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static slds-form-element_readonly">
+                                        <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_age_range}</label>
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:formattedText value="{!v.simpleRecord.cel_age_range__c}" />
+                                            </span>
+                                        </span>
+                                        <aura:if isTrue="{!v.fieldAccess.ageRange}">
+                                            <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                                <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                            </button>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static slds-form-element_readonly">
+                                        <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_leisure}</label>
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:formattedText value="{!v.simpleRecord.cel_leisure__c}" />
+                                            </span>
+                                        </span>
+                                        <aura:if isTrue="{!v.fieldAccess.leisure}">
+                                            <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                                <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                            </button>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="slds-form-element slds-form_compound">
+                    <div class="slds-grid slds-glutters_small">
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static slds-form-element_readonly">
+                                        <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_children_number}</label>
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:formattedText value="{!v.simpleRecord.cel_children_number__r.Name}" />
+                                            </span>
+                                        </span>
+                                        <aura:if isTrue="{!v.fieldAccess.children_number}">
+                                            <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                                <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                            </button>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static slds-form-element_readonly">
+                                        <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_food_beverage_preferences}</label>
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:formattedText value="{!v.simpleRecord.cel_food_beverage_preferences__c}" />
+                                            </span>
+                                        </span>
+                                        <aura:if isTrue="{!v.fieldAccess.foodBeveragePref}">
+                                            <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                                <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                            </button>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>     
+                <fieldset class="slds-form-element slds-form_compound">
+                    <div class="slds-grid slds-glutters_small">
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static slds-form-element_readonly">
+                                        <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_personal_assistant}</label>
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:formattedText value="{!v.simpleRecord.cel_personal_assistant__c}" />
+                                            </span>
+                                        </span>
+                                        <aura:if isTrue="{!v.fieldAccess.personalAssistant}">
+                                            <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                                <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                            </button>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static slds-form-element_readonly">
+                                        <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_personal_shopper_2}</label>
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:formattedText value="{!v.simpleRecord.cel_personal_shopper_2__c}" />
+                                            </span>
+                                        </span>
+                                        <aura:if isTrue="{!v.fieldAccess.personalShopper2}">
+                                            <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                                <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                            </button>
+                                        </aura:if>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>  
+                <fieldset class="slds-form-element slds-form_compound">
+                    <div class="slds-grid slds-glutters_small">
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static slds-form-element_readonly">
+                                        <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_personal_shopper_1}</label>
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:formattedText value="{!v.simpleRecord.cel_personal_shopper_1__c}" />
+                                            </span>
+                                        </span>
+                                        <aura:if isTrue="{!v.fieldAccess.personalShopper1}">
+                                            <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                                <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                            </button>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static slds-form-element_readonly">
+                                        <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_personal_shopper_3}</label>
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:formattedText value="{!v.simpleRecord.cel_personal_shopper_3__c}" />
+                                            </span>
+                                        </span>
+                                        <aura:if isTrue="{!v.fieldAccess.personalShopper3}">
+                                            <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                                <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                            </button>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset> 
+    
+            </div>
+        </lightning:card>
+
+
+<!--Address 2-->
+<lightning:card iconName="standard:account" title="Address 2">
+        <div class="slds-section slds-is-open openActivities SMALL runtime_sales_activitiesActivityTimelineFixedLayout" data-aura-rendered-by="5568:0" data-aura-class="runtime_sales_activitiesActivityTimelineFixedLayout">
+            <fieldset class="slds-form-element slds-form_compound">
+                <div class="slds-grid slds-glutters_small">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static slds-form-element_readonly">
+                                    <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_2_line_1}</label>
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                            <lightning:formattedText value="{!v.simpleRecord.cel_addr_2_line_1__c}" />
+                                        </span>
+                                    </span>
+                                    <aura:if isTrue="{!v.fieldAccess.addr2Line1}">
+                                        <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                            <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                        </button>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static slds-form-element_readonly">
+                                    <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_2_zipcode}</label>
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                            <lightning:formattedText value="{!v.simpleRecord.cel_addr_2_zipcode__c}" />
+                                        </span>
+                                    </span>
+                                    <aura:if isTrue="{!v.fieldAccess.addr2Zipcode}">
+                                        <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                            <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                        </button>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="slds-form-element slds-form_compound">
+                <div class="slds-grid slds-glutters_small">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static slds-form-element_readonly">
+                                    <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_2_line_2}</label>
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                            <lightning:formattedText value="{!v.simpleRecord.cel_addr_2_line_2__c}" />
+                                        </span>
+                                    </span>
+                                    <aura:if isTrue="{!v.fieldAccess.addr2Line2}">
+                                        <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                            <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                        </button>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static slds-form-element_readonly">
+                                    <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_2_region}</label>
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                            <lightning:formattedText value="{!v.simpleRecord.cel_addr_2_region__c}" />
+                                        </span>
+                                    </span>
+                                    <aura:if isTrue="{!v.fieldAccess.addr2Region}">
+                                        <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                            <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                        </button>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="slds-form-element slds-form_compound">
+                <div class="slds-grid slds-glutters_small">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static slds-form-element_readonly">
+                                    <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_2_line_3}</label>
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                            <lightning:formattedText value="{!v.simpleRecord.cel_addr_2_line_3__c}" />
+                                        </span>
+                                    </span>
+                                    <aura:if isTrue="{!v.fieldAccess.addr2Line3}">
+                                        <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                            <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                        </button>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static slds-form-element_readonly">
+                                    <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_2_city}</label>
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                            <lightning:formattedText value="{!v.simpleRecord.cel_addr_2_city__c}" />
+                                        </span>
+                                    </span>
+                                    <aura:if isTrue="{!v.fieldAccess.addr2City}">
+                                        <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                            <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                        </button>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>     
+            <fieldset class="slds-form-element slds-form_compound">
+                    <div class="slds-grid slds-glutters_small">
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static slds-form-element_readonly">
+                                        <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_2_country}</label>
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:formattedText value="{!v.simpleRecord.cel_addr_2_country__r.Name}" />
+                                            </span>
+                                        </span>
+                                        <aura:if isTrue="{!v.fieldAccess.addr2Country}">
+                                            <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                                <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                            </button>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </fieldset> 
+        </div>
+    </lightning:card>        
+
+
+    <!--Address 3-->
+<lightning:card iconName="standard:account" title="Address 3">
+        <div class="slds-section slds-is-open openActivities SMALL runtime_sales_activitiesActivityTimelineFixedLayout" data-aura-rendered-by="5568:0" data-aura-class="runtime_sales_activitiesActivityTimelineFixedLayout">
+            <fieldset class="slds-form-element slds-form_compound">
+                <div class="slds-grid slds-glutters_small">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static slds-form-element_readonly">
+                                    <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_3_line_1}</label>
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                            <lightning:formattedText value="{!v.simpleRecord.cel_addr_3_line_1__c}" />
+                                        </span>
+                                    </span>
+                                    <aura:if isTrue="{!v.fieldAccess.addr3Line1}">
+                                        <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                            <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                        </button>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static slds-form-element_readonly">
+                                    <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_3_zipcode}</label>
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                            <lightning:formattedText value="{!v.simpleRecord.cel_addr_3_zipcode__c}" />
+                                        </span>
+                                    </span>
+                                    <aura:if isTrue="{!v.fieldAccess.addr3Zipcode}">
+                                        <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                            <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                        </button>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="slds-form-element slds-form_compound">
+                <div class="slds-grid slds-glutters_small">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static slds-form-element_readonly">
+                                    <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_3_line_2}</label>
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                            <lightning:formattedText value="{!v.simpleRecord.cel_addr_3_line_2__c}" />
+                                        </span>
+                                    </span>
+                                    <aura:if isTrue="{!v.fieldAccess.addr3Line2}">
+                                        <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                            <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                        </button>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static slds-form-element_readonly">
+                                    <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_3_region}</label>
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                            <lightning:formattedText value="{!v.simpleRecord.cel_addr_3_region__c}" />
+                                        </span>
+                                    </span>
+                                    <aura:if isTrue="{!v.fieldAccess.addr3Region}">
+                                        <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                            <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                        </button>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="slds-form-element slds-form_compound">
+                <div class="slds-grid slds-glutters_small">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static slds-form-element_readonly">
+                                    <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_3_line_3}</label>
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                            <lightning:formattedText value="{!v.simpleRecord.cel_addr_3_line_3__c}" />
+                                        </span>
+                                    </span>
+                                    <aura:if isTrue="{!v.fieldAccess.addr3Line3}">
+                                        <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                            <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                        </button>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element__static slds-form-element_readonly">
+                                    <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_3_city}</label>
+                                    <span class="test-id__field-value slds-form-element__static slds-grow">
+                                        <span class="uiOutputText">
+                                            <lightning:formattedText value="{!v.simpleRecord.cel_addr_3_city__c}" />
+                                        </span>
+                                    </span>
+                                    <aura:if isTrue="{!v.fieldAccess.addr3City}">
+                                        <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                            <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                        </button>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>     
+            <fieldset class="slds-form-element slds-form_compound">
+                    <div class="slds-grid slds-glutters_small">
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static slds-form-element_readonly">
+                                        <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_3_country}</label>
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:formattedText value="{!v.simpleRecord.cel_addr_3_country__r.Name}" />
+                                            </span>
+                                        </span>
+                                        <aura:if isTrue="{!v.fieldAccess.addr3Country}">
+                                            <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                                <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                            </button>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </fieldset> 
+        </div>
+    </lightning:card> 
+
+    <!--Address 4-->
+    <lightning:card iconName="standard:account" title="Address 4">
+            <div class="slds-section slds-is-open openActivities SMALL runtime_sales_activitiesActivityTimelineFixedLayout" data-aura-rendered-by="5568:0" data-aura-class="runtime_sales_activitiesActivityTimelineFixedLayout">
+                <fieldset class="slds-form-element slds-form_compound">
+                    <div class="slds-grid slds-glutters_small">
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static slds-form-element_readonly">
+                                        <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_4_line_1}</label>
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:formattedText value="{!v.simpleRecord.cel_addr_4_line_1__c}" />
+                                            </span>
+                                        </span>
+                                        <aura:if isTrue="{!v.fieldAccess.addr4Line1}">
+                                            <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                                <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                            </button>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static slds-form-element_readonly">
+                                        <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_4_zipcode}</label>
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:formattedText value="{!v.simpleRecord.cel_addr_4_zipcode__c}" />
+                                            </span>
+                                        </span>
+                                        <aura:if isTrue="{!v.fieldAccess.addr4Zipcode}">
+                                            <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                                <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                            </button>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+    
+                <fieldset class="slds-form-element slds-form_compound">
+                    <div class="slds-grid slds-glutters_small">
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static slds-form-element_readonly">
+                                        <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_4_line_2}</label>
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:formattedText value="{!v.simpleRecord.cel_addr_4_line_2__c}" />
+                                            </span>
+                                        </span>
+                                        <aura:if isTrue="{!v.fieldAccess.addr4Line2}">
+                                            <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                                <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                            </button>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static slds-form-element_readonly">
+                                        <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_4_region}</label>
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:formattedText value="{!v.simpleRecord.cel_addr_4_region__c}" />
+                                            </span>
+                                        </span>
+                                        <aura:if isTrue="{!v.fieldAccess.addr4Region}">
+                                            <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                                <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                            </button>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="slds-form-element slds-form_compound">
+                    <div class="slds-grid slds-glutters_small">
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static slds-form-element_readonly">
+                                        <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_4_line_3}</label>
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:formattedText value="{!v.simpleRecord.cel_addr_4_line_3__c}" />
+                                            </span>
+                                        </span>
+                                        <aura:if isTrue="{!v.fieldAccess.addr4Line3}">
+                                            <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                                <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                            </button>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                            <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                <div class="slds-form-element__control">
+                                    <div class="slds-form-element__static slds-form-element_readonly">
+                                        <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_4_city}</label>
+                                        <span class="test-id__field-value slds-form-element__static slds-grow">
+                                            <span class="uiOutputText">
+                                                <lightning:formattedText value="{!v.simpleRecord.cel_addr_4_city__c}" />
+                                            </span>
+                                        </span>
+                                        <aura:if isTrue="{!v.fieldAccess.addr4City}">
+                                            <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                                <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                            </button>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>     
+                <fieldset class="slds-form-element slds-form_compound">
+                        <div class="slds-grid slds-glutters_small">
+                            <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;" role="listitem">
+                                <div class="slds-form-element slds-form-element_edit slds-hint-parent">
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-form-element__static slds-form-element_readonly">
+                                            <label class="slds-form-element__label" for="recordName">{!$Label.c.cel_account_addr_4_country}</label>
+                                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                                <span class="uiOutputText">
+                                                    <lightning:formattedText value="{!v.simpleRecord.cel_addr_4_country__r.Name}" />
+                                                </span>
+                                            </span>
+                                            <aura:if isTrue="{!v.fieldAccess.addr4Country}">
+                                                <button class="slds-button test-id__inline-edit-trigger slds-button_icon-small slds-shrink-none inline-edit-trigger slds-button_icon-container" type="button">
+                                                    <lightning:icon  iconName="utility:edit" size="xx-small" alternativeText="" onclick="{!c.editRecord}" />
+                                                </button>
+                                            </aura:if>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </fieldset> 
+            </div>
+        </lightning:card> 
+    </aura:set>
+    </aura:if>
+</aura:component>

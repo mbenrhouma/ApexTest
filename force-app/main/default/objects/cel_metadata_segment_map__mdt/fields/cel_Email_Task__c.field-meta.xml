@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cel_Email_Task__c</fullName>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <label>Email Task</label>
+    <referenceTo>cel_email_task__mdt</referenceTo>
+    <relationshipLabel>Metadata Segment Maps</relationshipLabel>
+    <relationshipName>Metadata_Segment_Maps</relationshipName>
+    <required>false</required>
+    <type>MetadataRelationship</type>
+    <unique>false</unique>
+</CustomField>

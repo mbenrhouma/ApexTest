@@ -1,0 +1,1321 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="CEL_PersonAccountController" >
+    <aura:attribute name="account" type="Account" /> 
+    <aura:attribute name="allCountries" type="List" access="global" />
+    <aura:attribute name="allLanguages" type="List" access="global" />
+    <aura:attribute name="allChannels" type="List" access="global" />
+    <aura:attribute name="allAppointment" type="List" access="global" />
+    <aura:attribute name="isEditContactTab" type="Boolean" default="false" />
+    <aura:attribute name="fieldAccess" type="Map" access="global" />
+	<aura:registerEvent name="CEL_EventContactDetail" type="c:CEL_EventContactDetail"/>
+    <div class="SMALL runtime_sales_activitiesActivityTimelineFixedLayout" data-aura-rendered-by="984:0" data-aura-class="runtime_sales_activitiesActivityTimelineFixedLayout">
+        <div class="slds-section slds-is-open openActivities " data-aura-rendered-by="5568:0">
+            <div class="slds-section__title slds-m-bottom--x-small" data-aura-rendered-by="5569:0">
+                <h2 class="slds-section__title-action slds-align-middle slds-truncate" data-aura-rendered-by="5570:0">Email</h2>
+            </div>
+            <div class="slds-section__content" data-aura-rendered-by="5581:0">
+                <div class="slds-grid full forcePageBlockSectionRow">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_email}" />
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow slds-form-element_separator">  
+                                <aura:if isTrue="{!v.isEditContactTab}">
+                                    <ui:inputText value="{!v.account.cel_PersonEmail__c}" keyup="{!c.validateEmail}"  updateOn="keyup"/>   
+                                    <aura:set attribute="else">
+                                                 <ui:outputText value="{!v.account.cel_PersonEmail__c}" />
+                                        <aura:if isTrue="{!v.fieldAccess.personEmail}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                    </aura:set>
+                                </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                     <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_validity}" />
+                            </span>
+                        </div>
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.isEditContactTab}">
+                                          <span class="slds-radio">
+                                          <aura:if isTrue="{!v.account.cel_email_validity__c}">
+                                            <input type="radio" id="TrueValidityPhone" name="optionsValidityEmail" value="TrueValidityPhone" checked="checked" />
+                                          <aura:set attribute="else">
+                                          <input type="radio" id="TrueValidityPhone" name="optionsValidityEmail" value="TrueValidityPhone" />
+                                          </aura:set>
+                                          </aura:if>
+                                            <label class="slds-radio__label" for="TrueValidityPhone">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><lightning:icon class="icn_green" iconName="utility:check" size="small" /></span>
+                                                
+                                            </label>
+                                        </span>
+                                        <span class="slds-radio">
+                                          <aura:if isTrue="{!v.account.cel_email_validity__c }">
+                                            <input type="radio" id="FalseValidityPhone" name="optionsValidityEmail" value="FalseValidityPhone" />
+                                          <aura:set attribute="else">
+                                            <input type="radio" id="FalseValidityPhone" name="optionsValidityEmail" value="FalseValidityPhone" checked="checked"/>  
+                                          </aura:set>
+                                          </aura:if>
+                                              <label class="slds-radio__label" for="FalseValidityPhone">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><lightning:icon class="icn_red" iconName="utility:close" size="small" /></span>
+                                            </label>
+                                        </span>      
+                                    <aura:set attribute="else">
+                                <aura:if isTrue="{!v.account.cel_email_validity__c }">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                        <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>
+                                    <aura:if isTrue="{!v.fieldAccess.emailValidity}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                
+                                        
+                                    </aura:set>
+                               </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_optin}" />
+                            </span>
+                        </div>
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.isEditContactTab}">
+                                          <span class="slds-radio">
+                                          <aura:if isTrue="{!v.account.cel_do_not_email__c}">
+                                            <input type="radio" id="True" name="options" value="True" checked="checked" />
+                                          <aura:set attribute="else">
+                                          <input type="radio" id="True" name="options" value="True" />
+                                          </aura:set>
+                                          </aura:if>
+                                            <label class="slds-radio__label" for="True">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><lightning:icon class="icn_green" iconName="utility:check" size="small" /></span>
+                                                
+                                            </label>
+                                        </span>
+                                        <span class="slds-radio">
+                                          <aura:if isTrue="{!v.account.cel_do_not_email__c}">
+                                            <input type="radio" id="False" name="options" value="False" />
+                                          <aura:set attribute="else">
+                                            <input type="radio" id="False" name="options" value="False" checked="checked"/>  
+                                          </aura:set>
+                                          </aura:if>
+                                              <label class="slds-radio__label" for="False">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><lightning:icon class="icn_red" iconName="utility:close" size="small" /></span>
+                                            </label>
+                                        </span>      
+                                    <aura:set attribute="else">
+                                <aura:if isTrue="{!v.account.cel_do_not_email__c}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                        <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>
+                                    <aura:if isTrue="{!v.fieldAccess.emailOptin}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                
+                                        
+                                    </aura:set>
+                               </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-grid full forcePageBlockSectionRow">  
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_secondary_email}" />
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow slds-form-element_separator">
+                                  <aura:if isTrue="{!v.isEditContactTab}">
+             						 <ui:inputText value="{!v.account.cel_email_2__c}"  keyup="{!c.validateSecondaryEmail}"  updateOn="keyup"/>   
+                                    <aura:set attribute="else">
+                                        <ui:outputText value="{!v.account.cel_email_2__c}" />
+                                        <aura:if isTrue="{!v.fieldAccess.secondaryEmail}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                    </aura:set>
+                                </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        
+                        
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                      
+                        <div class="slds-form-element__control slds-grid itemBody">
+                                 
+                        </div>
+                    </div>
+                </div>
+                    
+            </div>
+        </div>
+    </div>
+
+
+     <div class="SMALL runtime_sales_activitiesActivityTimelineFixedLayout" data-aura-rendered-by="984:0" data-aura-class="runtime_sales_activitiesActivityTimelineFixedLayout">
+        <div class="slds-section slds-is-open openActivities " data-aura-rendered-by="5568:0">
+            <div class="slds-section__title slds-m-bottom--x-small" data-aura-rendered-by="5569:0">
+                <h2 class="slds-section__title-action slds-align-middle slds-truncate" data-aura-rendered-by="5570:0">Phone</h2>
+            </div>
+            
+            <div class="slds-section__content" data-aura-rendered-by="5581:0">   
+
+                <div class="slds-grid full forcePageBlockSectionRow">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_phone_1_number}" />
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow slds-form-element_separator">
+                                <aura:if isTrue="{!v.isEditContactTab}">
+                                    <!-- keyup="{!c.validateNumber}"  updateOn="keyup" -->
+                                        <ui:inputText aura:id="PersonHomePhone" value="{!v.account.PersonHomePhone}" />
+                                    <aura:set attribute="else">
+                                        <ui:outputText value="{!v.account.PersonHomePhone}" />
+                                        <aura:if isTrue="{!v.fieldAccess.phone_1_number}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                    </aura:set>
+                                </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_validity}" />
+                            </span>
+                        </div>
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.isEditContactTab}">
+                                          <span class="slds-radio">
+                                          <aura:if isTrue="{!v.account.cel_homephone_validity__c}">
+                                            <input type="radio" id="TrueValidityPhone1" name="optionsValidityPhone1" value="TrueValidityPhone1" checked="checked" />
+                                          <aura:set attribute="else">
+                                          <input type="radio" id="TrueValidityPhone1" name="optionsValidityPhone1" value="TrueValidityPhone1" />
+                                          </aura:set>
+                                          </aura:if>
+                                            <label class="slds-radio__label" for="TrueValidityPhone1">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><lightning:icon class="icn_green" iconName="utility:check" size="small" /></span>
+                                                
+                                            </label>
+                                        </span>
+                                        <span class="slds-radio">
+                                          <aura:if isTrue="{!v.account.cel_homephone_validity__c }">
+                                            <input type="radio" id="FalseValidityPhone1" name="optionsValidityPhone1" value="FalseValidityPhone1" />
+                                          <aura:set attribute="else">
+                                            <input type="radio" id="FalseValidityPhone1" name="optionsValidityPhone1" value="FalseValidityPhone1" checked="checked"/>  
+                                          </aura:set>
+                                          </aura:if>
+                                              <label class="slds-radio__label" for="FalseValidityPhone1">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><lightning:icon class="icn_red" iconName="utility:close" size="small" /></span>
+                                            </label>
+                                        </span>      
+                                    <aura:set attribute="else">
+                                <aura:if isTrue="{!v.account.cel_homephone_validity__c}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                        <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>
+                                    <aura:if isTrue="{!v.fieldAccess.phone1Validity}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                
+                                        
+                                    </aura:set>
+                               </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_optin}" />
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.isEditContactTab}">
+                                          <span class="slds-radio">
+                                                <aura:if isTrue="{!v.account.PersonDoNotCall}">
+                                            <input type="radio" id="TruePhone" name="optionsphone" value="TruePhone"  checked="checked"/>
+                                          <aura:set attribute="else">
+                                            <input type="radio" id="TruePhone" name="optionsphone" value="TruePhone" />  
+                                          </aura:set>
+                                          </aura:if>
+                                            <label class="slds-radio__label" for="TruePhone">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><lightning:icon class="icn_green" iconName="utility:check" size="small" /></span>
+                                            </label>
+                                        </span>
+                                        <span class="slds-radio">
+                                             <aura:if isTrue="{!v.account.PersonDoNotCall}">
+                                            <input type="radio" id="FalsePhone" name="optionsphone" value="FalsePhone"/>
+                                          <aura:set attribute="else">
+                                            <input type="radio" id="FalsePhone" name="optionsphone" value="FalsePhone" checked="checked"/> 
+                                          </aura:set>
+                                          </aura:if>
+                                            <label class="slds-radio__label" for="FalsePhone">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><lightning:icon class="icn_red" iconName="utility:close" size="small" /></span>
+                                            </label>
+                                        </span>      
+                                    <aura:set attribute="else">
+                                <aura:if isTrue="{!v.account.PersonDoNotCall}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                        <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>
+                                    <aura:if isTrue="{!v.fieldAccess.phoneOptin}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                
+                                        
+                                    </aura:set>
+                               </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="slds-grid full forcePageBlockSectionRow">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_phone_2_number}" />
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow slds-form-element_separator">
+                                <aura:if isTrue="{!v.isEditContactTab}">
+                                        <ui:inputText aura:id="PersonMobilePhone" value="{!v.account.PersonMobilePhone}"/>
+                                    <aura:set attribute="else">
+                                        <ui:outputText value="{!v.account.PersonMobilePhone}" />
+                                        <aura:if isTrue="{!v.fieldAccess.phone_2_number}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>  
+                                        
+                                    </aura:set>
+                                </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                &nbsp;
+                            </span>
+                        </div> 
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.isEditContactTab}">
+                                          <span class="slds-radio">
+                                          <aura:if isTrue="{!v.account.cel_mobile_validity__c}">
+                                            <input type="radio" id="TrueValidityPhone2" name="optionsValidityPhone2" value="TrueValidityPhone2" checked="checked" />
+                                          <aura:set attribute="else">
+                                          <input type="radio" id="TrueValidityPhone2" name="optionsValidityPhone2" value="TrueValidityPhone2" />
+                                          </aura:set>
+                                          </aura:if>
+                                            <label class="slds-radio__label" for="TrueValidityPhone2">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><lightning:icon class="icn_green" iconName="utility:check" size="small" /></span>
+                                                
+                                            </label>
+                                        </span>
+                                        <span class="slds-radio">
+                                          <aura:if isTrue="{!v.account.cel_mobile_validity__c }">
+                                            <input type="radio" id="FalseValidityPhone2" name="optionsValidityPhone2" value="FalseValidityPhone2" />
+                                          <aura:set attribute="else">
+                                            <input type="radio" id="FalseValidityPhone2" name="optionsValidityPhone2" value="FalseValidityPhone2" checked="checked"/>  
+                                          </aura:set>
+                                          </aura:if>
+                                              <label class="slds-radio__label" for="FalseValidityPhone2">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><lightning:icon class="icn_red" iconName="utility:close" size="small" /></span>
+                                            </label>
+                                        </span>      
+                                    <aura:set attribute="else">
+                                <aura:if isTrue="{!v.account.cel_mobile_validity__c}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                        <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>
+                                    <aura:if isTrue="{!v.fieldAccess.phone2Validity}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                
+                                        
+                                    </aura:set>
+                               </aura:if>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                &nbsp;
+                            </span>
+                        </div>
+                         <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                &nbsp;
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-grid full forcePageBlockSectionRow">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_phone_3_number}" />
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow slds-form-element_separator">
+                                 <aura:if isTrue="{!v.isEditContactTab}">
+                                        <ui:inputText aura:id="PersonOtherPhone" value="{!v.account.PersonOtherPhone}"/>
+                                    <aura:set attribute="else">
+                                        <ui:outputText value="{!v.account.PersonOtherPhone}" />
+                                        <aura:if isTrue="{!v.fieldAccess.phone_3_number}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                    </aura:set>
+                                </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                &nbsp;
+                            </span>
+                        </div> 
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.isEditContactTab}">
+                                          <span class="slds-radio">
+                                          <aura:if isTrue="{!v.account.cel_otherphone_validity__c}">
+                                            <input type="radio" id="TrueValidityPhone3" name="optionsValidityPhone3" value="TrueValidityPhone3" checked="checked" />
+                                          <aura:set attribute="else">
+                                          <input type="radio" id="TrueValidityPhone3" name="optionsValidityPhone3" value="TrueValidityPhone3" />
+                                          </aura:set>
+                                          </aura:if>
+                                            <label class="slds-radio__label" for="TrueValidityPhone3">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><lightning:icon class="icn_green" iconName="utility:check" size="small" /></span>
+                                                
+                                            </label>
+                                        </span>
+                                        <span class="slds-radio">
+                                          <aura:if isTrue="{!v.account.cel_otherphone_validity__c }">
+                                            <input type="radio" id="FalseValidityPhone3" name="optionsValidityPhone3" value="FalseValidityPhone3" />
+                                          <aura:set attribute="else">
+                                            <input type="radio" id="FalseValidityPhone3" name="optionsValidityPhone3" value="FalseValidityPhone3" checked="checked"/>  
+                                          </aura:set>
+                                          </aura:if>
+                                              <label class="slds-radio__label" for="FalseValidityPhone3">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><lightning:icon class="icn_red" iconName="utility:close" size="small" /></span>
+                                            </label>
+                                        </span>      
+                                    <aura:set attribute="else">
+                                <aura:if isTrue="{!v.account.cel_otherphone_validity__c}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                        <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>
+                                    <aura:if isTrue="{!v.fieldAccess.phone3Validity}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                
+                                        
+                                    </aura:set>
+                               </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                &nbsp;
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                &nbsp;
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                    
+            </div>
+        </div>
+    </div>
+   
+       <div class="SMALL runtime_sales_activitiesActivityTimelineFixedLayout" data-aura-rendered-by="984:0" data-aura-class="runtime_sales_activitiesActivityTimelineFixedLayout">
+        <div class="slds-section slds-is-open openActivities " data-aura-rendered-by="5568:0">
+            <div class="slds-section__title slds-m-bottom--x-small" data-aura-rendered-by="5569:0">
+                <h2 class="slds-section__title-action slds-align-middle slds-truncate" data-aura-rendered-by="5570:0">SMS</h2>
+            </div>
+            
+            <div class="slds-section__content" data-aura-rendered-by="5581:0">
+    <div class="slds-grid full forcePageBlockSectionRow">
+        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+           
+        </div>
+         <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_validity}" />
+                            </span>
+                        </div> 
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.simpleRecord.cel_homephone_validity__c}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                        <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_optin}" />
+                            </span>
+                        </div>
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.simpleRecord.cel_optin_sms__c}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                        <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                </aura:if>
+                            </span>
+                        </div>
+                    </div>
+    </div>
+
+            </div>
+           </div>
+    </div>
+
+     <div class="SMALL runtime_sales_activitiesActivityTimelineFixedLayout" data-aura-rendered-by="984:0" data-aura-class="runtime_sales_activitiesActivityTimelineFixedLayout">
+        <div class="slds-section slds-is-open openActivities " data-aura-rendered-by="5568:0">
+            <div class="slds-section__title slds-m-bottom--x-small" data-aura-rendered-by="5569:0">
+                <h2 class="slds-section__title-action slds-align-middle slds-truncate" data-aura-rendered-by="5570:0">Chat</h2>
+            </div>
+            
+            <div class="slds-section__content" data-aura-rendered-by="5581:0">   
+
+                <div class="slds-grid full forcePageBlockSectionRow">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_we_chat_id}" />
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow slds-form-element_separator">
+                                <aura:if isTrue="{!v.isEditContactTab}">
+                                        <ui:inputText value="{!v.account.cel_wechat_id__c}" keyup="{!c.validateWeLineId}"  updateOn="keyup"/>
+                                    <aura:set attribute="else">
+                                        <ui:outputText value="{!v.account.cel_wechat_id__c}" />
+                                        <aura:if isTrue="{!v.fieldAccess.wechatId}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                    </aura:set>
+                                </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                      <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+             <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_validity}" />
+                            </span>
+                        </div> 
+            <div class="slds-form-element__control slds-grid itemBody">
+                <span class="test-id__field-value slds-form-element__static slds-grow">  
+                    &nbsp;
+                </span>
+            </div>
+        </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_optin}" />
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.isEditContactTab}">
+                                          <span class="slds-radio">
+                                          <aura:if isTrue="{!v.account.cel_optin_sms__c}">
+                                            <input type="radio" id="TrueChat" name="optionschat" value="TrueChat" checked="checked"/>
+                                          <aura:set attribute="else">
+                                            <input type="radio" id="TrueChat" name="optionschat" value="TrueChat"/> 
+                                          </aura:set>
+                                          </aura:if>
+                                            <label class="slds-radio__label" for="TrueChat">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><lightning:icon class="icn_green" iconName="utility:check" size="small" /></span>
+                                            </label>
+                                        </span>
+                                        <span class="slds-radio">
+                                            <aura:if isTrue="{!v.account.cel_optin_sms__c}">
+                                            <input type="radio" id="FalseChat" name="optionschat" value="FalseChat" />
+                                          <aura:set attribute="else">
+                                            <input type="radio" id="FalseChat" name="optionschat" value="FalseChat" checked="checked"/> 
+                                          </aura:set>
+                                          </aura:if>
+                                            <label class="slds-radio__label" for="FalseChat">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><lightning:icon class="icn_red" iconName="utility:close" size="small" /></span>
+                                            </label>
+                                        </span>      
+                                    <aura:set attribute="else">
+                                <aura:if isTrue="{!v.account.cel_optin_sms__c}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                        <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>
+                                    <aura:if isTrue="{!v.fieldAccess.chatOptin}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                
+                                        
+                                    </aura:set>
+                               </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            
+
+                <div class="slds-grid full forcePageBlockSectionRow">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_line_chat_id}" />
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody" >
+                            <span class="test-id__field-value slds-form-element__static slds-grow slds-form-element_separator" >
+                                <aura:if isTrue="{!v.isEditContactTab}">
+                                        <ui:inputText value="{!v.account.cel_line_id__c}"  keyup="{!c.validateLineId}"  updateOn="keyup"/>
+                                    <aura:set attribute="else">
+                                        <ui:outputText value="{!v.account.cel_line_id__c}" />
+                                        <aura:if isTrue="{!v.fieldAccess.linechatId}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                    </aura:set>
+                                </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                  <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+         
+            <div class="slds-form-element__control slds-grid itemBody">
+                <span class="test-id__field-value slds-form-element__static slds-grow">  
+                    &nbsp;
+                </span>
+            </div>
+        </div>  
+                  <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+         
+            <div class="slds-form-element__control slds-grid itemBody">
+                <span class="test-id__field-value slds-form-element__static slds-grow">  
+                    &nbsp;
+                </span>
+            </div>
+        </div>
+                  
+                </div>                 
+
+    
+                    
+            </div>
+        </div>
+    </div>
+
+   
+    <div class="SMALL runtime_sales_activitiesActivityTimelineFixedLayout" data-aura-rendered-by="984:0" data-aura-class="runtime_sales_activitiesActivityTimelineFixedLayout">
+        <div class="slds-section slds-is-open openActivities " data-aura-rendered-by="5568:0">
+            <div class="slds-section__title slds-m-bottom--x-small" data-aura-rendered-by="5569:0">
+                <h2 class="slds-section__title-action slds-align-middle slds-truncate" data-aura-rendered-by="5570:0">Address</h2>
+            </div>
+            
+            <div class="slds-section__content" data-aura-rendered-by="5581:0">
+                       
+
+                <div class="slds-grid full forcePageBlockSectionRow">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_address_line_1}" />
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow slds-form-element_separator">
+                                <aura:if isTrue="{!v.isEditContactTab}">
+                                        <ui:inputText value="{!v.account.cel_addr_1_line_1__c}" keyup="{!c.validateStreet1}"  updateOn="keyup"/>
+                                    <aura:set attribute="else">
+                                        <ui:outputText value="{!v.account.cel_addr_1_line_1__c}" />
+                                        <aura:if isTrue="{!v.fieldAccess.addr1}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                    </aura:set>
+                                </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                 <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_validity}" />
+                            </span>
+                        </div> 
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.isEditContactTab}">
+                                          <span class="slds-radio">
+                                          <aura:if isTrue="{!v.account.cel_addr_1_validity__c}">
+                                            <input type="radio" id="TrueValidityAddress" name="optionsValidityAddress" value="TrueValidityAddress" checked="checked" />
+                                          <aura:set attribute="else">
+                                          <input type="radio" id="TrueValidityAddress" name="optionsValidityAddress" value="TrueValidityAddress" />
+                                          </aura:set>
+                                          </aura:if>
+                                            <label class="slds-radio__label" for="TrueValidityAddress">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><lightning:icon class="icn_green" iconName="utility:check" size="small" /></span>
+                                            </label> 
+                                        </span>
+                                        <span class="slds-radio">
+                                          <aura:if isTrue="{!v.account.cel_addr_1_validity__c}">
+                                            <input type="radio" id="FalseValidityAddress" name="optionsValidityAddress" value="FalseValidityAddress" />
+                                          <aura:set attribute="else">
+                                            <input type="radio" id="FalseValidityAddress" name="optionsValidityAddress" value="FalseValidityAddress" checked="checked"/>  
+                                          </aura:set>
+                                          </aura:if>
+                                              <label class="slds-radio__label" for="FalseValidityAddress">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><lightning:icon class="icn_red" iconName="utility:close" size="small" /></span>
+                                            </label>
+                                        </span>      
+                                    <aura:set attribute="else">
+                                <aura:if isTrue="{!v.account.cel_addr_1_validity__c}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                        <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>
+                                    <aura:if isTrue="{!v.fieldAccess.addressValidity}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                
+                                        
+                                    </aura:set>
+                               </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_optin}" />
+                            </span>
+                        </div> 
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.isEditContactTab}">
+                                          <span class="slds-radio">
+                                          <aura:if isTrue="{!v.account.cel_optin_postal_mail__c}">
+                                            <input type="radio" id="TrueAddr" name="optionsaddress" value="TrueAddr" checked="checked"/>
+                                          <aura:set attribute="else">
+                                            <input type="radio" id="TrueAddr" name="optionsaddress" value="TrueAddr"/> 
+                                          </aura:set>
+                                          </aura:if>
+                                            <label class="slds-radio__label" for="TrueAddr">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><lightning:icon class="icn_green" iconName="utility:check" size="small" /></span>
+                                                
+                                            </label>
+                                        </span>
+                                        <span class="slds-radio">
+                                              <aura:if isTrue="{!v.account.cel_optin_postal_mail__c}">
+                                            <input type="radio" id="FalseAddr" name="optionsaddress" value="FalseAddr"/>
+                                          <aura:set attribute="else">
+                                            <input type="radio" id="FalseAddr" name="optionsaddress" value="FalseAddr" checked="checked"/> 
+                                          </aura:set>
+                                          </aura:if>
+                                            <label class="slds-radio__label" for="FalseAddr">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"><lightning:icon class="icn_red" iconName="utility:close" size="small" /></span>
+                                            </label>
+                                        </span>      
+                                    <aura:set attribute="else">
+                                <aura:if isTrue="{!v.account.cel_optin_postal_mail__c}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                        <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>
+                                    <aura:if isTrue="{!v.fieldAccess.addrOptin}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                
+                                        
+                                    </aura:set>
+                               </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-grid full forcePageBlockSectionRow">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_address_line_2}" />
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow slds-form-element_separator">
+                                <aura:if isTrue="{!v.isEditContactTab}">
+                                        <ui:inputText value="{!v.account.cel_addr_1_line_2__c}" keyup="{!c.validateStreet2}"  updateOn="keyup"/>
+                                    <aura:set attribute="else">
+                                        <ui:outputText value="{!v.account.cel_addr_1_line_2__c}" />
+                                        <aura:if isTrue="{!v.fieldAccess.addr2}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                    </aura:set>
+                                </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                &nbsp;
+                            </span>
+                        </div> 
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">  
+                                &nbsp;
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                &nbsp;
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                &nbsp;
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            
+
+                <div class="slds-grid full forcePageBlockSectionRow">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_address_line_3}" />
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow slds-form-element_separator">
+                                <aura:if isTrue="{!v.isEditContactTab}">
+                                        <ui:inputText value="{!v.account.cel_addr_1_line_3__c}" keyup="{!c.validateStreet3}"  updateOn="keyup"/>
+                                    <aura:set attribute="else">
+                                        <ui:outputText value="{!v.account.cel_addr_1_line_3__c}" />
+                                        <aura:if isTrue="{!v.fieldAccess.addr3}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                    </aura:set>
+                                </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                &nbsp;
+                            </span>
+                        </div> 
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">  
+                                &nbsp;
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                &nbsp;
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                &nbsp;
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            
+
+                <div class="slds-grid full forcePageBlockSectionRow">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_address_zipcode}" />
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow slds-form-element_separator">
+                                <aura:if isTrue="{!v.isEditContactTab}">
+                                        <ui:inputText value="{!v.account.cel_addr_1_zipcode__c}" keyup="{!c.validateZipCode}"  updateOn="keyup"/>
+                                    <aura:set attribute="else">
+                                        <ui:outputText value="{!v.account.cel_addr_1_zipcode__c}" />
+                                        <aura:if isTrue="{!v.fieldAccess.zipcode}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                    </aura:set>
+                                </aura:if>
+                            </span>
+                        </div>
+                    </div> <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                &nbsp;
+                            </span>
+                        </div> 
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">  
+                                &nbsp;
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                &nbsp;
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                &nbsp;
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-grid full forcePageBlockSectionRow">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_address_region}" />
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow slds-form-element_separator">
+                                 <aura:if isTrue="{!v.isEditContactTab}">
+                                        <ui:inputText value="{!v.account.cel_addr_1_region__c}" keyup="{!c.validateState}"  updateOn="keyup"/>
+                                    <aura:set attribute="else">
+                                        <ui:outputText value="{!v.account.cel_addr_1_region__c}" />
+                                        <aura:if isTrue="{!v.fieldAccess.region}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                    </aura:set>
+                                </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                &nbsp;
+                            </span>
+                        </div> 
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">  
+                                &nbsp;
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                &nbsp;
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                &nbsp;
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            
+
+                <div class="slds-grid full forcePageBlockSectionRow">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_address_city}" />
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow slds-form-element_separator">
+                                <aura:if isTrue="{!v.isEditContactTab}">
+                                        <ui:inputText aura:id="cel_addr_1_city__c"  value="{!v.account.cel_addr_1_city__c}" />
+                                    <aura:set attribute="else">
+                                        <ui:outputText value="{!v.account.cel_addr_1_city__c}" />
+                                        <aura:if isTrue="{!v.fieldAccess.city}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                    </aura:set>
+                                </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                &nbsp;
+                            </span>
+                        </div> 
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">  
+                                &nbsp;
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                &nbsp;
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                &nbsp;
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                  <div class="slds-grid full forcePageBlockSectionRow">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_country}" />
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.isEditContactTab}">
+                                    <ui:inputSelect aura:id="CEL_Country" value="{!v.account.cel_addr_1_country__c}">
+                                        <aura:iteration items="{!v.allCountries}" var="c">
+                                            <ui:inputSelectOption text="{!c.value}" label="{!c.label}"></ui:inputSelectOption>
+                                        </aura:iteration>
+                                    </ui:inputSelect>
+                                    <aura:set attribute="else">
+                                        <!-- <ui:inputSelect aura:id="CEL_Country" value="{!v.account.cel_addr_1_country__c}">
+                                            <aura:iteration items="{!v.allCountries}" var="c">
+                                                <ui:inputSelectOption text="{!c.value}" label="{!c.label}"></ui:inputSelectOption>
+                                            </aura:iteration>
+                                            
+                                        </ui:inputSelect> -->
+                                        <lightning:formattedText value="{!v.account.cel_addr_1_country__c}" />
+                                        <aura:if isTrue="{!v.fieldAccess.addr_1_country}">
+                                            <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                                            </span>
+                                        </aura:if>
+                                    </aura:set>
+                                </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                &nbsp;
+                            </span>
+                        </div> 
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">  
+                                &nbsp;
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                &nbsp;
+                            </span>
+                        </div>
+                        <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                &nbsp;
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                    
+            </div>
+        </div>
+    </div>
+	   <div class="SMALL runtime_sales_activitiesActivityTimelineFixedLayout" data-aura-rendered-by="984:0" data-aura-class="runtime_sales_activitiesActivityTimelineFixedLayout">
+        <div class="slds-section slds-is-open openActivities " data-aura-rendered-by="5568:0">
+            <div class="slds-section__title slds-m-bottom--x-small" data-aura-rendered-by="5569:0">
+                <h2 class="slds-section__title-action slds-align-middle slds-truncate" data-aura-rendered-by="5570:0">Preferences</h2>
+            </div>
+            
+            <div class="slds-section__content" data-aura-rendered-by="5581:0">
+    <div class="slds-grid full forcePageBlockSectionRow">
+        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+            <div class="test-id__field-label-container">
+                <span class="test-id__field-label slds-form-element__label">
+                    <ui:outputText value="{!$Label.c.cel_contact_preferred_channel_contact}" />
+                </span>
+            </div>
+            <div class="slds-form-element__control slds-grid itemBody">
+                <span class="test-id__field-value slds-form-element__static slds-grow">
+                    <ui:inputSelect aura:id="CEL_Channels" value="{!v.account.cel_preferred_contact_method__c}">
+                        <aura:iteration items="{!v.allChannels}" var="c">
+                            <ui:inputSelectOption text="{!c.value}" label="{!c.label}"></ui:inputSelectOption>
+                        </aura:iteration>
+                    </ui:inputSelect>
+                    <aura:if isTrue="{!v.fieldAccess.preference_channel}">
+                          <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                               <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                          </span>
+                    </aura:if>
+                </span>
+            </div>
+        </div>
+        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+            <div class="test-id__field-label-container">
+                <span class="test-id__field-label slds-form-element__label">
+                    &nbsp;
+                </span>
+            </div> 
+            <div class="slds-form-element__control slds-grid itemBody">
+                <span class="test-id__field-value slds-form-element__static slds-grow">  
+                    &nbsp;
+                </span>
+            </div>
+        </div>
+        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+            <div class="test-id__field-label-container">
+                <span class="test-id__field-label slds-form-element__label">
+                    &nbsp;
+                </span>
+            </div>
+            <div class="slds-form-element__control slds-grid itemBody">
+                <span class="test-id__field-value slds-form-element__static slds-grow">
+                    &nbsp;
+                </span>
+            </div>
+        </div>
+    </div>
+   
+
+    <div class="slds-grid full forcePageBlockSectionRow">
+        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+            <div class="test-id__field-label-container">
+                <span class="test-id__field-label slds-form-element__label">
+                    <ui:outputText value="{!$Label.c.cel_contact_preferred_language}" />
+                </span>
+            </div>
+            <div class="slds-form-element__control slds-grid itemBody">
+                <span class="test-id__field-value slds-form-element__static slds-grow">
+                    <ui:inputSelect aura:id="CEL_Channels" value="{!v.account.cel_communication_language__c}">
+                        <aura:iteration items="{!v.allLanguages}" var="c">
+                            <ui:inputSelectOption text="{!c.value}" label="{!c.label}"></ui:inputSelectOption>
+                        </aura:iteration>
+                    </ui:inputSelect>
+                    <aura:if isTrue="{!v.fieldAccess.preference_lang}">
+                          <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                               <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                          </span>
+                    </aura:if>
+                </span>
+            </div>
+        </div>
+        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+            <div class="test-id__field-label-container">
+                <span class="test-id__field-label slds-form-element__label">
+                    &nbsp;
+                </span>
+            </div> 
+            <div class="slds-form-element__control slds-grid itemBody">
+                <span class="test-id__field-value slds-form-element__static slds-grow">  
+                    &nbsp;
+                </span>
+            </div>
+        </div>
+        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+            <div class="test-id__field-label-container">
+                <span class="test-id__field-label slds-form-element__label">
+                    &nbsp;
+                </span>
+            </div>
+            <div class="slds-form-element__control slds-grid itemBody">
+                <span class="test-id__field-value slds-form-element__static slds-grow">
+                    &nbsp;
+                </span>
+            </div>
+        </div>
+    </div>
+                 <div class="slds-grid full forcePageBlockSectionRow">
+        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+            <div class="test-id__field-label-container">
+                <span class="test-id__field-label slds-form-element__label">
+                    <ui:outputText value="{!$Label.c.cel_preferred_appointment_time}" />
+                </span>
+            </div>
+            <div class="slds-form-element__control slds-grid itemBody">
+                <span class="test-id__field-value slds-form-element__static slds-grow">
+                    <ui:inputSelect aura:id="CEL_Channels" value="{!v.account.cel_preferred_appointment_time__c}">
+                        <aura:iteration items="{!v.allAppointment}" var="c">
+                            <ui:inputSelectOption text="{!c.value}" label="{!c.label}"></ui:inputSelectOption>
+                        </aura:iteration>
+                    </ui:inputSelect>
+                    <aura:if isTrue="{!v.fieldAccess.preference_appointment_time}">
+                          <span class="slds-float--right litIcon editIcon" onclick="{!c.changeContactTabLayout}">
+                               <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="Edit"/>
+                          </span>
+                    </aura:if>
+                </span>
+            </div>
+        </div>
+        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+            <div class="test-id__field-label-container">
+                <span class="test-id__field-label slds-form-element__label">
+                    &nbsp;
+                </span>
+            </div> 
+            <div class="slds-form-element__control slds-grid itemBody">
+                <span class="test-id__field-value slds-form-element__static slds-grow">  
+                    &nbsp;
+                </span>
+            </div>
+        </div>
+        <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView">
+            <div class="test-id__field-label-container">
+                <span class="test-id__field-label slds-form-element__label">
+                    &nbsp;
+                </span>
+            </div>
+            <div class="slds-form-element__control slds-grid itemBody">
+                <span class="test-id__field-value slds-form-element__static slds-grow">
+                    &nbsp;
+                </span>
+            </div>
+        </div>
+    </div>
+            </div>
+           </div>
+    </div>  
+    
+    <aura:if isTrue="{!v.isEditContactTab}">
+        <div class="slds-align--absolute-center">
+            <button type="button" class="slds-button slds-button--neutral slds-m-around--medium" onclick="{!c.clickCancel}" aura:id="btnCancel">
+            {!$Label.c.cel_cancel}
+            </button> 
+            <button type="button" class="slds-button slds-button--brand slds-m-around--medium" onclick="{!c.createAccount}" aura:id="btnSave">
+            {!$Label.c.cel_save}
+            </button>
+        </div> 
+    </aura:if>
+</aura:component>

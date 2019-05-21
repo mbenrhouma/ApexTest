@@ -1,0 +1,83 @@
+<aura:component controller="CEL_CampaignController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="campaignregionsList" type="List" />
+    <aura:attribute name="campaignCountriesList" type="List" />
+    <aura:attribute name="campaignStoresList" type="List" />
+    <aura:attribute name="ListDisabled" type="Boolean" default="false"/>
+    <aura:attribute name="buttonDisabled" type="Boolean" default="false"/>
+    <aura:attribute name="message" type="String" default=""/>
+    <aura:attribute name="messageType" type="String" default="info"/>
+    <aura:attribute name="displayMessage" type="Boolean" default="false"/>
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    
+    <article  class="slds-m-around--x-small slds-card">
+        <div aura:id="divHeader" class="slds-card__header slds-grid" >
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-account">
+                        <span class="slds-assistive-text">Stores Choice</span>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate">
+                        <span style="font-weight:bolder">Stores Choice</span>
+                    </a>
+                    </h2>
+                </div>
+                <div class="slds-no-flex">
+                    <lightning:button class="slds-button slds-button_brand" label="Save" disabled="{!v.buttonDisabled}" onclick="{!c.save}" />
+                    <lightning:button class="slds-button slds-button_neutral" label="Cancel" disabled="{!v.buttonDisabled}" onclick="{!c.doInit}" />
+                    <lightning:button class="slds-button slds-button_neutral" label="Reset" disabled="{!v.buttonDisabled}" onclick="{!c.reset}" />
+                </div>
+            </header>
+       </div>
+       
+       <aura:if isTrue="{!v.displayMessage}">
+           <div class="{!'slds-box slds-theme--shade slds-theme--alert-texture slds-theme--' + v.messageType}">
+               <lightning:icon iconName="{! 'utility:'+ v.messageType }" size="medium" alternativeText="{!v.messageType}" Class="slds-icon_container slds-icon"/>&nbsp;
+               <span class="slds-text-body–regular">
+                   <aura:unescapedHtml value="{!v.message}"/>
+               </span>
+           </div>
+       </aura:if>
+       
+       <footer class="slds-card__footer">
+        <div class="slds-p-horizontal_small slds-grid">
+            <!-- REGIONS -->
+            <div class="slds-col">
+                <p class="title">Regions</p>
+                <div class="slds-form-element__control">
+                    <ui:inputSelect multiple="true" class="multiple" aura:id="InputSelectMultipleRegion" disabled="{!v.ListDisabled}" change="{!c.getCountriesList}">
+                        <aura:iteration items="{!v.campaignregionsList}" var="region">
+                             <ui:inputSelectOption aura:id="{!region.key}" text="{!region.key}" label="{!region.value}" value="false"/>
+                         </aura:iteration>
+                    </ui:inputSelect>
+                </div>
+            </div>
+            <!-- COUNTRIES -->
+            <div class="slds-col">
+                <p class="title">Country(ies)</p>
+                <div class="slds-form-element__control">
+                    <ui:inputSelect multiple="true" class="multiple" aura:id="InputSelectMultipleCountry" disabled="{!v.ListDisabled}" change="{!c.getStoreList}">
+                        <aura:iteration items="{!v.campaignCountriesList}" var="country">
+                             <ui:inputSelectOption aura:id="{!country.key}" text="{!country.key}" label="{!country.value}" value="false"/>
+                         </aura:iteration>
+                    </ui:inputSelect>
+                </div>
+            </div>
+            <!-- STORES -->
+            <div class="slds-col">
+                <p class="title">Stores</p>
+                <div class="slds-form-element__control">
+                    <ui:inputSelect multiple="true" class="multiple" aura:id="InputSelectMultipleStores" disabled="{!v.ListDisabled}" change="{!c.changeStoreList}">
+                        <aura:iteration items="{!v.campaignStoresList}" var="store">
+                             <ui:inputSelectOption aura:id="{!store.key}" text="{!store.key}" label="{!store.value}" value="false"/>
+                         </aura:iteration>
+                    </ui:inputSelect>
+                </div>
+           </div>
+        </div>
+    </footer>
+    </article >
+</aura:component>

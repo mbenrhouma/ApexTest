@@ -1,0 +1,14 @@
+.THIS .formattedTextCustom {
+    padding-top: 5px !important;
+}
+
+.THIS input:disabled {
+    background-color: transparent !important;
+    border: 0 !important;
+    cursor: not-allowed;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding-left: 0;
+}

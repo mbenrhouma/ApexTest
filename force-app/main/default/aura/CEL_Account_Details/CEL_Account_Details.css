@@ -1,0 +1,27 @@
+.THIS .icn_red svg {
+    fill : red;
+}
+.THIS .icn_green svg {
+    fill : green;
+}
+.THIS .slds-form-element__control .slds-grid .itemBody {
+    border-bottom: 1px solid rgb(221, 219, 218) !important;
+}
+.THIS button:hover{
+    cursor: pointer;
+}
+
+.THIS .formattedTextCustom {
+    padding-top: 5px !important;
+}
+
+.THIS input:disabled {
+    background-color: transparent !important;
+    border: 0 !important;
+    cursor: not-allowed;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding-left: 0;
+}

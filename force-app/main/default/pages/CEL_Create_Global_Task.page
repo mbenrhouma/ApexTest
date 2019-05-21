@@ -1,0 +1,17 @@
+<apex:page standardController="Task" recordSetVar="tasks">
+    <apex:includeLightning />
+    <div id="lightning">
+    </div>
+    
+    <script>
+        $Lightning.use("c:CEL_Lightning_App" , function() {
+            $Lightning.createComponent(
+                "c:CEL_Task_Main",
+                 { },
+                 "lightning",
+                 function(cmp) { }
+            );
+    });
+        
+  </script>
+</apex:page>

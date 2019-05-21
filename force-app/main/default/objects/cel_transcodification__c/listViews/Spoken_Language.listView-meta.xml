@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Spoken_Language</fullName>
+    <columns>OBJECT_ID</columns>
+    <columns>cel_transcodification_code__c</columns>
+    <columns>NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>cel_transcodification__c.cel_spokenlanguage</value>
+    </filters>
+    <label>Spoken Language</label>
+</ListView>

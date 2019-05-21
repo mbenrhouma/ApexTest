@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Countries</fullName>
+    <columns>OBJECT_ID</columns>
+    <columns>cel_transcodification_code__c</columns>
+    <columns>NAME</columns>
+    <columns>cel_transcodification_label1__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>cel_transcodification__c.Country</value>
+    </filters>
+    <label>Countries</label>
+</ListView>

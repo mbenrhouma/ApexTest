@@ -1,0 +1,6 @@
+.THIS .hllo {
+    height: 265px;
+    max-height: 265px;
+    overflow-y: auto;
+    overflow-x: auto;
+}

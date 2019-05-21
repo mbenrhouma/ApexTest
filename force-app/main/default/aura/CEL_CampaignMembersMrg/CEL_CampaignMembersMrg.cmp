@@ -1,0 +1,7 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:attribute name="refresh" type="boolean" default="true"/>
+    <aura:handler name="RefreshMemberList" event="c:CEL_Refresh_CampaignMembersList" action="{!c.handleComponentEvent}"/>
+    
+    <c:CEL_ContactsCampaignStatus recordId="{!v.recordId}"/>
+    <c:CEL_CampaignMembersList refresh="{!v.refresh}" recordId="{!v.recordId}"/>
+</aura:component>

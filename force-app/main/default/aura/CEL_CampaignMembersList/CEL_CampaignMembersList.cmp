@@ -1,0 +1,222 @@
+<aura:component controller="CEL_TheContactsController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:attribute name="campaignMemberStatusList" type="List" />
+    <aura:attribute name="numberOfCampaignMemberStatus" type="Integer" />
+    <aura:attribute name="isSelectAll" type="boolean" default="false" />
+    <aura:attribute name="filtName" type="String" default="" />
+    <aura:attribute name="filtCustomerCode" type="String" default="" />
+    <aura:attribute name="refresh" type="Boolean" default="true" />
+    <aura:attribute name="CurrencyLocale" type="String" default="" />
+    
+    <aura:handler name="init" action="{!c.getCampaignMemberStatusListCtrl}" value="{!this}" />
+    <aura:handler name="change" value="{!v.refresh}" action="{!c.getCampaignMemberStatusListCtrl}" />
+    
+    <div class="slds-m-around--x-small slds-card">
+        <div class="slds-p-horizontal_small">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_4-of-8">
+                    <h1 class="slds-p-horizontal_large slds-card__header-title" style="font-weight:bolder">
+                        <span class="slds-text-heading_small">Campaign Members ({!v.numberOfCampaignMemberStatus})</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="slds-p-horizontal_small">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_2-of-6">
+                    <div class="slds-form-element__control">
+                      <p class="title">{!$Label.c.cel_EnterAName}</p>
+                        <ui:inputText  aura:id="filtName" keyup="{!c.getCampaignMemberStatusListCtrl}" keydown="{!c.getCampaignMemberStatusListCtrl}"
+                                      value="{!v.filtName}" updateOn="keyup" Placeholder="{!$Label.c.cel_EnterAName}"/>
+                     </div>
+               </div>
+               <div class="slds-col slds-size_2-of-6">
+                   <div class="slds-form-element__control">
+                      <p class="title">{!$Label.c.cel_EnterACustomerCode}</p>
+                        <ui:inputText  aura:id="filtCustomerCode" keyup="{!c.getCampaignMemberStatusListCtrl}" keydown="{!c.getCampaignMemberStatusListCtrl}"
+                                      value="{!v.filtCustomerCode}" updateOn="keyup" Placeholder="{!$Label.c.cel_EnterACustomerCode}"/>
+                     </div>
+               </div>
+            </div>
+        </div>
+        <div class="slds-p-horizontal_small">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_4-of-8">
+                </div>
+                <div class="slds-col slds-size_4-of-8 buttons">
+                    <div class="slds-form-element__control">
+                        <lightning:button class="slds-button_brand" label="Save" onclick="{!c.updateAllmembersCtrl}" />
+                        <lightning:button class="slds-button slds-button_neutral" label="Cancel" onclick="{!c.cancelUpdateAllMemberCtrl}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br></br>
+        <div class="slds-p-horizontal_small hllo">
+            <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" height="400px;">
+                <thead>
+                    <tr class="slds-text-title_caps">
+                            <th class="slds-cell-shrink" scope="col">
+                                <div class="slds-truncate" title="celName">{!$Label.c.cel_RecordLink}
+                                    <button class="slds-button slds-button_icon slds-button_icon" title="Sort">
+                                        <span class="slds-assistive-text">Sort</span>
+                                    </button>
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="celName">{!$Label.c.cel_Name}
+                                    <button class="slds-button slds-button_icon slds-button_icon" title="Sort">
+                                        <span class="slds-assistive-text">Sort</span>
+                                    </button>
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="CustomerCode">{!$Label.c.cel_CustomerCode}
+                                    <button class="slds-button slds-button_icon slds-button_icon" title="Sort">
+                                        <span class="slds-assistive-text">Sort</span>
+                                    </button>
+                                </div>
+                            </th>
+                         <th scope="col">
+                                <div class="slds-truncate" title="Invited">{!$Label.c.cel_Invited}
+                                    <button class="slds-button slds-button_icon slds-button_icon" title="Sort">
+                                        <span class="slds-assistive-text">Sort</span>
+                                    </button>
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Contacted">{!$Label.c.cel_Contacted}
+                                    <button class="slds-button slds-button_icon slds-button_icon" title="Sort">
+                                        <span class="slds-assistive-text">Sort</span>
+                                    </button>
+                                </div>
+                            </th>
+                        <th scope="col">
+                                <div class="slds-truncate" title="Contacted">{!$Label.c.cel_Confirmed}
+                                    <button class="slds-button slds-button_icon slds-button_icon" title="Sort">
+                                        <span class="slds-assistive-text">Sort</span>
+                                    </button>
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="ShowUp">{!$Label.c.cel_Showup}
+                                    <button class="slds-button slds-button_icon slds-button_icon" title="Sort">
+                                        <span class="slds-assistive-text">Sort</span>
+                                    </button>
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Purchasing">{!$Label.c.cel_Purchasing}
+                                    <button class="slds-button slds-button_icon slds-button_icon" title="Sort">
+                                        <span class="slds-assistive-text">Sort</span>
+                                    </button>
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Purchasing">{!$Label.c.cel_reswdep}<br/>({!v.CurrencyLocale})
+                                    <button class="slds-button slds-button_icon slds-button_icon" title="Sort">
+                                        <span class="slds-assistive-text">Sort</span>
+                                    </button>
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Purchasing">{!$Label.c.cel_reswodep}<br/>({!v.CurrencyLocale})
+                                    <button class="slds-button slds-button_icon slds-button_icon" title="Sort">
+                                        <span class="slds-assistive-text">Sort</span>
+                                    </button>
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Purchasing"><span style="text-align: center">{!$Label.c.cel_reswdep}<br/>(Euros)</span>
+                                    <button class="slds-button slds-button_icon slds-button_icon" title="Sort">
+                                        <span class="slds-assistive-text">Sort</span>
+                                    </button>
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Purchasing">{!$Label.c.cel_reswodep}<br/>(Euros)
+                                    <button class="slds-button slds-button_icon slds-button_icon" title="Sort">
+                                        <span class="slds-assistive-text">Sort</span>
+                                    </button>
+                                </div>
+                            </th>
+                    </tr>
+               </thead>
+               <tbody >
+                     <aura:iteration items="{!v.campaignMemberStatusList}" var="campaignMemberStatus">
+                         <tr class="slds-hint-parent">
+                              <td class="slds-cell-shrink" data-label="Select Row">
+                                  <p><a id="{!campaignMemberStatus.Id}" onclick="{!c.handleClick}">{!campaignMemberStatus.Name}</a></p>
+                              </td>
+                              <th scope="row" data-label="Name">
+                                  <div class="slds-truncate" title="Cloudhub">{!campaignMemberStatus.cel_Contact__r.Name}</div>
+                              </th>
+                              <td data-label="CustomerCode">
+                                  <div class="slds-truncate" title="CcustomerCode">{!campaignMemberStatus.cel_Customer_Code__c}</div>
+                              </td>
+                              <td data-label="Invited">
+                                      <ui:inputCheckbox aura:id="checkBoxInvited" 
+                                                     text="{!campaignMemberStatus.Id}" 
+                                                     value ="{!campaignMemberStatus.cel_Invited__c}" />
+                              </td>
+                               <td data-label="Contacted">
+                                  <ui:inputCheckbox aura:id="checkBoxContacted" 
+                                                    text="{!campaignMemberStatus.Id}" 
+                                                    value ="{!campaignMemberStatus.cel_Contacted__c}"
+                                                    />
+                              </td>
+                              <td data-label="Confirmed">
+                                  <ui:inputCheckbox aura:id="checkBoxConfirmed" 
+                                                    text="{!campaignMemberStatus.Id}" 
+                                                    value ="{!campaignMemberStatus.cel_Confirmed__c}"
+                                                    />
+                              </td>
+                              <td data-label="ShowUp">
+                                  <ui:inputCheckbox aura:id="checkBoxShowUp" 
+                                                    text="{!campaignMemberStatus.Id}" 
+                                                    value ="{!campaignMemberStatus.cel_show_up__c}" />
+                              </td>
+                              <td data-label="Purchasing">
+                                  <ui:inputCheckbox aura:id="checkBoxPurchasing" 
+                                                    text="{!campaignMemberStatus.Id}" 
+                                                    value ="{!campaignMemberStatus.cel_Purchasing__c}" />
+                              </td>
+                              <td data-label="ReswdepLocale">
+                                  <ui:inputNumber aura:id="ReswdepLocale" 
+                                                  class="field" 
+                                                  value="{!campaignMemberStatus.cel_Res_w_dep__c}" />
+                              </td>
+                              <td data-label="ReswodepLocale">
+                                   <ui:inputNumber aura:id="ReswodepLocale" 
+                                                   class="field" 
+                                                   value="{!campaignMemberStatus.cel_Reswodep__c}" />
+                                 
+                               </td>
+                               <td data-label="ReswdepEur">
+                                  <ui:outputCurrency aura:id="resweuro" 
+                                                     value ="{!campaignMemberStatus.cel_ResWDep_Euro__c}" />
+                               </td>
+                               <td data-label="ReswodepEur">
+                                  <ui:outputCurrency aura:id="reswoeuro"
+                                                     value ="{!campaignMemberStatus.cel_ResWODep_Euro__c}" />
+                               </td>
+                          </tr>
+                     </aura:iteration>
+                </tbody>
+            </table>
+        </div>
+        <br/>
+        <div class="slds-p-horizontal_small">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_4-of-8">
+                </div>
+                <div class="slds-col slds-size_4-of-8 buttons">
+                    <div class="slds-form-element__control">
+                        <lightning:button class="slds-button_brand" label="Save" onclick="{!c.updateAllmembersCtrl}" />
+                        <lightning:button class="slds-button slds-button_neutral" label="Cancel" onclick="{!c.cancelUpdateAllMemberCtrl}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

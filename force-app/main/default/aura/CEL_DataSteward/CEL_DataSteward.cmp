@@ -1,0 +1,447 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="CEL_PersonAccountController">
+    <aura:attribute name="account" type="Account" /> 
+    <aura:attribute name="isExpandedSectionOne" type="Boolean" default="true" />
+    <aura:attribute name="isExpandedSectionTwo" type="Boolean" default="true" />
+    <aura:attribute name="fieldAccess" type="Map" access="global"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />    
+                
+    <div class="{! 'slds-section' + (v.isExpandedSectionOne ? ' slds-is-open' : '')}">
+        <h3 class="slds-section__title">
+            <button aria-controls="expando-unique-id" class="slds-button slds-section__title-action" aria-expanded="{!v.isExpandedSectionOne}" onclick="{!c.changeStateSectionOne}">
+                <lightning:icon class="icn_section" iconName="{!v.isExpandedSectionOne ? 'utility:chevrondown' : 'utility:chevronright'}" size="xx-small" />
+                <span class="slds-truncate" title="Section Title">{!$Label.c.cel_data_steward}</span>
+            </button>
+        </h3>
+        <div aria-hidden="{!!v.isExpandedSectionOne}" class="slds-section__content" id="expando-unique-id">                    
+     <div class="SMALL runtime_sales_activitiesActivityTimelineFixedLayout" data-aura-rendered-by="984:0" data-aura-class="runtime_sales_activitiesActivityTimelineFixedLayout">
+        <div class="slds-section slds-is-open openActivities " data-aura-rendered-by="5568:0">
+            <div class="slds-section__title slds-m-bottom--x-small" data-aura-rendered-by="5569:0">
+                <h2 class="slds-section__title-action slds-align-middle slds-truncate" data-aura-rendered-by="5570:0">Email</h2>
+            </div>
+            
+            <div class="slds-section__content" data-aura-rendered-by="5581:0">
+                <div class="slds-grid full forcePageBlockSectionRow">
+                     <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_updated}" />
+                            </span>
+                        </div>
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.account.cel_email_update__c == 'Y'}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                        <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_mailable}" />
+                            </span>
+                        </div>
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.account.cel_email_validity__c}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                    <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            <p>&nbsp;</p>
+    <div class="SMALL runtime_sales_activitiesActivityTimelineFixedLayout" data-aura-rendered-by="984:0" data-aura-class="runtime_sales_activitiesActivityTimelineFixedLayout">
+        <div class="slds-section slds-is-open openActivities " data-aura-rendered-by="5568:0">
+            <div class="slds-section__title slds-m-bottom--x-small" data-aura-rendered-by="5569:0">
+                <h2 class="slds-section__title-action slds-align-middle slds-truncate" data-aura-rendered-by="5570:0">Phone</h2>
+            </div>
+            
+            <div class="slds-section__content" data-aura-rendered-by="5581:0">
+                <div class="slds-grid full forcePageBlockSectionRow">
+                     <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_updated}" />
+                            </span>
+                        </div>
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.account.cel_homephone_update__c == 'Y'}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                        <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>                          
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_mailable}" />
+                            </span>
+                        </div>
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.account.cel_homephone_validity__c}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                    <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                </div>                    
+            </div>
+            <div class="slds-section__content" data-aura-rendered-by="5581:0">
+                <div class="slds-grid full forcePageBlockSectionRow">
+                     <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.account.cel_mobile_update__c== 'Y'}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                        <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>                          
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                          <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.account.cel_mobile_validity__c}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                    <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                </div>                    
+            </div>
+            <div class="slds-section__content" data-aura-rendered-by="5581:0">
+                <div class="slds-grid full forcePageBlockSectionRow">
+                     <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                         <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.account.cel_otherphone_update__c == 'Y'}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                        <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>                          
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                        
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.account.cel_otherphone_validity__c}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                    <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                </div>                    
+            </div>
+        </div>
+    </div>   <p>&nbsp;</p>
+             <p>&nbsp;</p>
+             <p>&nbsp;</p>
+             <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp; <p></p></p>
+            
+             <div class="SMALL runtime_sales_activitiesActivityTimelineFixedLayout" data-aura-rendered-by="984:0" data-aura-class="runtime_sales_activitiesActivityTimelineFixedLayout">
+        <div class="slds-section slds-is-open openActivities " data-aura-rendered-by="5568:0">
+            <div class="slds-section__title slds-m-bottom--x-small" data-aura-rendered-by="5569:0">
+                <h2 class="slds-section__title-action slds-align-middle slds-truncate" data-aura-rendered-by="5570:0">Address</h2>
+            </div>
+            
+            <div class="slds-section__content" data-aura-rendered-by="5581:0">
+                <div class="slds-grid full forcePageBlockSectionRow">
+                     <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_updated}" />
+                            </span>
+                        </div>
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.account.cel_address_update__c == 'Y'}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                        <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>                          
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_contact_mailable}" />
+                            </span>
+                        </div>
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.account.cel_addr_1_validity__c}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                    <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                </div>                    
+            </div>
+        </div>
+    </div>
+<div class="SMALL runtime_sales_activitiesActivityTimelineFixedLayout" data-aura-rendered-by="984:0" data-aura-class="runtime_sales_activitiesActivityTimelineFixedLayout">
+        <div class="slds-section slds-is-open openActivities " data-aura-rendered-by="5568:0">
+            <div class="slds-section__title slds-m-bottom--x-small" data-aura-rendered-by="5569:0">
+                <h2 class="slds-section__title-action slds-align-middle slds-truncate" data-aura-rendered-by="5570:0">Detailed Address quality</h2>
+            </div>
+            
+            <div class="slds-section__content" data-aura-rendered-by="5581:0">
+                <div class="slds-grid full forcePageBlockSectionRow">
+                     <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                Street Number
+                            </span>
+                        </div>
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.account.cel_CQ_NV__c == 'C'}">
+                                    <p style="color:green">C</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_NV__c == 'V'}">
+                                    <p style="color:green">V</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_NV__c == 'A'}">
+                                    <p style="color:red">A</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_NV__c == 'B'}">
+                                    <p style="color:red">B</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_NV__c == 'I'}">
+                                    <p style="color:red">I</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_NV__c == 'S'}">
+                                    <p style="color:red">S</p> 
+                                    </aura:if> 
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                Street Name
+                            </span>
+                        </div>
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.account.cel_CQ_LV__c == 'C'}">
+                                    <p style="color:green">C</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_LV__c == 'V'}">
+                                    <p style="color:green">V</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_LV__c == 'A'}">
+                                    <p style="color:red">A</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_LV__c == 'B'}">
+                                    <p style="color:red">B</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_LV__c == 'I'}">
+                                    <p style="color:red">I</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_LV__c == 'S'}">
+                                    <p style="color:red">S</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_LV__c == 'J'}">
+                                    <p style="color:orange">J</p> 
+                                    </aura:if> 
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                 Postal Code
+                            </span>
+                        </div>
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.account.cel_CQ_CP__c == 'C'}">
+                                    <p style="color:green">C</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_CP__c == 'V'}">
+                                    <p style="color:green">V</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_CP__c == 'A'}">
+                                    <p style="color:red">A</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_CP__c == 'B'}">
+                                    <p style="color:red">B</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_CP__c == 'I'}">
+                                    <p style="color:red">I</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_CP__c == 'S'}">
+                                    <p style="color:red">S</p> 
+                                    </aura:if> 
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                Status
+                                City
+                            </span>
+                        </div>
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.account.cel_CQ_City__c == 'C'}">
+                                    <p style="color:green">C</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_City__c == 'V'}">
+                                    <p style="color:green">V</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_City__c == 'A'}">
+                                    <p style="color:red">A</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_City__c == 'B'}">
+                                    <p style="color:red">B</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_City__c == 'I'}">
+                                    <p style="color:red">I</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_City__c == 'S'}">
+                                    <p style="color:red">S</p> 
+                                    </aura:if> 
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                Status Region
+                            </span>
+                        </div>
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.account.cel_CQ_Region__c == 'C'}">
+                                    <p style="color:green">C</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_Region__c == 'V'}">
+                                    <p style="color:green">V</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_Region__c == 'A'}">
+                                    <p style="color:red">A</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_Region__c == 'B'}">
+                                    <p style="color:red">B</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_Region__c == 'I'}">
+                                    <p style="color:red">I</p> 
+                                    </aura:if> 
+                                <aura:if isTrue="{!v.account.cel_CQ_Region__c == 'S'}">
+                                    <p style="color:red">S</p> 
+                                    </aura:if> 
+                            </span>
+                        </div>
+                    </div>
+                </div>                    
+            </div>
+        </div>
+    </div>
+            <div class="slds-section__content" data-aura-rendered-by="5581:0">
+                <div class="slds-grid full forcePageBlockSectionRow">
+                     <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_global_update}" />
+                            </span>
+                        </div>
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.account.cel_global_update__c == 'Y'}">
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                        <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>                          
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_rcu_update}" />
+                            </span>
+                        </div>
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.account.cel_rcu_update__c}"> 
+                                    <lightning:icon class="icn_green" iconName="utility:check" size="small" />
+                                    <aura:set attribute="else">
+                                    <lightning:icon class="icn_red" iconName="utility:close" size="small" />
+                                    </aura:set>
+                                    </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                 </div>                    
+            </div>
+            <div class="slds-section__content" data-aura-rendered-by="5581:0">
+                <div class="slds-grid full forcePageBlockSectionRow">
+                    <div class="slds-has-flexi-truncate slds-p-horizontal_x-small full forcePageBlockItem forcePageBlockItemView" style ="width:40%;">
+                        <div class="test-id__field-label-container">
+                            <span class="test-id__field-label slds-form-element__label">
+                                <ui:outputText value="{!$Label.c.cel_do_not_send_to_dqm}" />
+                            </span>
+                        </div>
+                       <div class="slds-form-element__control slds-grid itemBody">
+                            <span class="test-id__field-value slds-form-element__static slds-grow">
+                                <aura:if isTrue="{!v.account.cel_do_not_send_to_dqm__c}">
+                                    <lightning:input type="checkbox" value="false"  onchange="{! c.sendToDqm }" checked="true" />
+                                   <span class="slds-checkbox--faux"></span>
+                                    <aura:set attribute="else">
+                                    <lightning:input type="checkbox" value="true" onchange="{! c.sendToDqm }"/>
+
+                                    </aura:set>
+                                    </aura:if>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</aura:component>

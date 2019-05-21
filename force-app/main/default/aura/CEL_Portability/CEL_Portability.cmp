@@ -1,0 +1,15 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" controller="CEL_PortabilityController">
+    <aura:attribute name="customerCardReport" type="String" />
+    <aura:attribute name="transactionReport" type="String" />
+    <aura:attribute name="campaignReport"  type="String" />
+    <aura:attribute name="caseReport"  type="String"  />
+    <aura:attribute name="personContactID"  type="String"  />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />    
+
+    <lightning:button variant="brand" label="Customer Card" onclick="{!c.openReportCustomerCard}" class="button-portability"/>
+    <lightning:button variant="brand" label="Transactions" onclick="{!c.openReportTransactions}" class="button-portability"/>
+    <lightning:button variant="brand" label="Campaigns" onclick="{!c.openReportCampaigns}" class="button-portability"/>
+    <lightning:button variant="brand" label="Cases" onclick="{!c.openReportCases}" class="button-portability"/>
+
+
+</aura:component>

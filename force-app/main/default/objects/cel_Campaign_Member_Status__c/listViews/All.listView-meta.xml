@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>cel_Contact__c</columns>
+    <columns>cel_Invited__c</columns>
+    <columns>cel_Confirmed__c</columns>
+    <columns>cel_show_up__c</columns>
+    <columns>cel_Purchasing__c</columns>
+    <columns>NAME</columns>
+    <columns>cel_RTW__c</columns>
+    <columns>cel_Shoes__c</columns>
+    <columns>cel_Bags__c</columns>
+    <columns>cel_SLG__c</columns>
+    <columns>cel_ACC__c</columns>
+    <columns>cel_Campaign__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

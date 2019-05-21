@@ -1,0 +1,291 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="CEL_CampaignController">
+    <aura:attribute name="campaignDetail" type="Object" />
+    <aura:attribute name="Region" type="String" />
+    <aura:attribute name="Country" type="List" />
+    <aura:attribute name="nbCountries" type="Integer" />
+    <aura:attribute name="Store" type="List" />
+    <aura:attribute name="nbStores" type="Integer" />
+    <aura:attribute name="classColumn" type="String" />
+    <aura:attribute name="showLoadingSpinner" type="Boolean" default="false"/>
+    
+    <aura:handler name="init" action="{!c.getControlCampaignDetails}" value="{!this}" />
+    <aura:handler event="force:refreshView" action="{!c.getCampaignDetail}"/>
+    
+    <div class="container theTable">
+        
+        <aura:if isTrue="{!v.showLoadingSpinner}">
+            <div class="spinnerLoading">
+                <lightning:spinner alternativeText="Loading" size="large" />
+            </div>
+                <p class="textSpinnerLoading">{!$Label.c.cel_campaign_loading_message}</p>
+        </aura:if>
+        
+            <h1 style="font-weight: bold; color:white; font-size:1.3em">{!$Label.c.cel_campaign_details}</h1>
+            <h1 style="font-weight: bold; color:white"> {!$Label.c.cel_campaign_objectives}&nbsp;{!v.campaignDetail.cel_Reason__c} - {!v.campaignDetail.targetLabel} </h1>
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <!-- CATEGORY -->
+                <tr>
+                    <td>
+                      <div class="slds-truncate">{!$Label.c.cel_campaign_category}</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">
+                        {!v.campaignDetail.categories}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate" title="Invited">{!$Label.c.cel_campaign_invited}</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">
+                            <aura:if isTrue="{!v.campaignDetail.cel_TotalInvited__c != 0 }">
+                                {!v.campaignDetail.cel_TotalInvited__c}
+                                <aura:set attribute="else">
+                                    {!v.campaignDetail.cel_TotalInvitedParent__c}
+                                </aura:set>
+                            </aura:if>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate"></div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!$Label.c.cel_campaign_total_potential_sales}</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">
+                            <lightning:formattedNumber value="{!v.campaignDetail.cel_Total_potential_sales__c}" style="decimal" maximumFractionDigits="0"/> €
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate"></div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!$Label.c.cel_campaign_clienteling_rate}</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!v.campaignDetail.cel_Clienteling_Rate__c}%</div>
+                    </td>
+                    <td data-label="emp">
+                        <div class="slds-truncate"></div>
+                    </td>
+                </tr>
+                <!-- PERIOD -->
+                <tr>
+                    <td>
+                        <div class="slds-truncate">{!$Label.c.cel_campaign_period}</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!v.campaignDetail.cel_Period__c}</div>
+                    </td>
+                    <td data-label="Contacted">
+                        <div class="slds-truncate">{!$Label.c.cel_campaign_contacted}</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">
+                            <aura:if isTrue="{!v.campaignDetail.cel_TotalContacted__c != 0 }">
+                                {!v.campaignDetail.cel_TotalContacted__c}
+                                <aura:set attribute="else">
+                                    {!v.campaignDetail.cel_TotalContactedParentAction__c}
+                                </aura:set>
+                            </aura:if>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">
+                            {!v.campaignDetail.cel_contacted_Percent__c}%
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!$Label.c.cel_campaign_direct_sales}</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">
+                            <lightning:formattedNumber value="{!v.campaignDetail.cel_TotalDirectSales__c}" style="decimal" maximumFractionDigits="0"/> €
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!v.campaignDetail.cel_direct_sales_percent__c}%</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!$Label.c.cel_campaign_activation_rate}</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!v.campaignDetail.cel_Activation_Rate__c}%</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate"></div>
+                    </td>
+                </tr>
+                <!-- REGION -->
+                <tr>
+                    <td>
+                        <div class="slds-truncate">{!$Label.c.cel_campaign_region}</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!v.Region}</div>
+                    </td>
+                    <td data-label="Confirmed">
+                        <div class="slds-truncate" title="Confirmed">{!$Label.c.cel_campaign_confirmed}</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">
+                            <aura:if isTrue="{!v.campaignDetail.cel_TotalConfirmed__c != 0 }">
+                                {!v.campaignDetail.cel_TotalConfirmed__c}
+                                <aura:set attribute="else">
+                                    {!v.campaignDetail.cel_Confirmed_Parent__c}
+                                </aura:set>
+                            </aura:if>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!v.campaignDetail.cel_Confirmed_percent__c}%</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!$Label.c.cel_campaign_resa_with_deposit}</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">
+                            <lightning:formattedNumber value="{!v.campaignDetail.cel_TotalResWDep__c}" style="decimal" maximumFractionDigits="0"/> €
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!v.campaignDetail.cel_Resa_w_deposit_percent__c}%</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!$Label.c.cel_campaign_cross_selling_rate}</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!v.campaignDetail.cel_Cross_Selling_Rate__c}%</div>
+                    </td>
+                    <td data-label="emp">
+                        <div class="slds-truncate"></div>
+                    </td>
+                </tr>
+                <!-- COUNTRY -->
+                <tr>
+                    <td>
+                        <div class="slds-truncate">{!$Label.c.cel_campaign_country}</div>
+                    </td>
+                    <td>
+                        <aura:if isTrue="{!v.nbCountries > 1 }">
+                            <div class="slds-truncate" onmouseover="{!c.showCountries}" onmouseleave="{!c.hideCountries}">{!v.nbCountries} countries</div>
+                            <div aura:id="divCountryHelpText" class="countryHelpText hide">
+                                <ul>
+                                    <aura:iteration items="{!v.Country}" var="c">
+                                        <li>{!c}</li>
+                                    </aura:iteration>
+                                </ul>
+                            </div>
+                            <aura:set attribute="else">
+                                <div class="slds-truncate">
+                                    <aura:iteration items="{!v.Country}" var="c" indexVar="index">
+                                        <span>{!c}</span>
+                                    </aura:iteration>
+                                </div>
+                            </aura:set>
+                        </aura:if> 
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!$Label.c.cel_campaign_show_up}</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">
+                            <aura:if isTrue="{!v.campaignDetail.cel_TotalShowUp__c != 0 }">
+                                {!v.campaignDetail.cel_TotalShowUp__c}
+                                <aura:set attribute="else">
+                                    {!v.campaignDetail.cel_TotalShowupParent__c}
+                                </aura:set>
+                            </aura:if>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!v.campaignDetail.cel_showup_Percent__c}%</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!$Label.c.cel_campaign_resa_without_deposit}</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">
+                            <lightning:formattedNumber value="{!v.campaignDetail.cel_TotalResWODep__c}" style="decimal" maximumFractionDigits="0"/> €
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!v.campaignDetail.cel_Resa_w_o_deposit_percent__c}%</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!$Label.c.cel_campaign_target_achieved_rate}</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!v.campaignDetail.cel_Target_achieved__c}%</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">
+                            (<lightning:formattedNumber value="{!v.campaignDetail.cel_Target_Achieved_Amount__c}" style="decimal" maximumFractionDigits="0"/> k€)
+                        </div>
+                    </td>
+                </tr>
+                <!-- Store -->
+                <tr>
+                    <td>
+                        <div class="slds-truncate">{!$Label.c.cel_campaign_store}</div>
+                    </td>
+                    <td>
+                        <aura:if isTrue="{!v.nbStores > 1 }">
+                            <div class="slds-truncate" onmouseover="{!c.showStores}" onmouseleave="{!c.hideStores}">{!v.nbStores} stores</div>
+                            <div aura:id="divStoreHelpText" class="storeHelpText hide">
+                                <ul>
+                                    <aura:iteration items="{!v.Store}" var="s">
+                                        <li>{!s}</li>
+                                    </aura:iteration>
+                                </ul>
+                            </div>
+                            <aura:set attribute="else">
+                                <aura:iteration items="{!v.Store}" var="s">
+                                    <span>{!s}</span>
+                                </aura:iteration>
+                            </aura:set>
+                        </aura:if> 
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!$Label.c.cel_campaign_purchasing}</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">
+                            <aura:if isTrue="{!v.campaignDetail.cel_TotalPurchasing__c != 0 }">
+                                {!v.campaignDetail.cel_TotalPurchasing__c}
+                                <aura:set attribute="else">
+                                    {!v.campaignDetail.cel_TotalPurchasing_Parent__c}
+                                </aura:set>
+                            </aura:if>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!v.campaignDetail.cel_Purchasing_percent__c}%</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!$Label.c.cel_campaign_store_turnover}</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">
+                            <lightning:formattedNumber value="{!v.campaignDetail.cel_Store_Turnover__c}" style="decimal" maximumFractionDigits="0"/> €
+                        </div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate"></div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">{!$Label.c.cel_campaign_performance_vs_budget}</div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">x<lightning:formattedNumber value="{!v.campaignDetail.cel_Performance_vs_Budget__c}" style="decimal" maximumFractionDigits="0"/></div>
+                    </td>
+                    <td>
+                        <div class="slds-truncate">
+                            (<lightning:formattedNumber value="{!v.campaignDetail.cel_BudgetEuro__c / 1000}" style="decimal" maximumFractionDigits="0"/> k€)
+                        </div>
+                    </td>
+                </tr>
+            </table>
+    </div>
+</aura:component>

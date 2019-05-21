@@ -1,0 +1,135 @@
+<aura:component controller="CEL_TheContactsController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:attribute name="contactList" type="List" />
+    <aura:attribute name="numberOfContacts" type="Integer" default="0"/>
+    <aura:attribute name="isSelectAll" type="boolean" default="false" />
+    <aura:attribute name="filtName" type="String" default="" />
+    <aura:attribute name="filtCustomerCode" type="String" default="" />
+    <aura:attribute name="loading" type="Boolean" default="false" />
+    
+    <aura:registerEvent name="RefreshMemberList" type="c:CEL_Refresh_CampaignMembersList"/>
+    
+    <aura:if isTrue="{!v.loading}">
+        <lightning:spinner alternativeText="Loading" size="medium" />
+    </aura:if>
+    
+    <div class="slds-m-around--x-small slds-card">
+        <div class="slds-p-horizontal_small">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_4-of-8">
+                    <h1 class="slds-card__header-title" style="font-weight:bolder">
+                        <span class="slds-text-heading_small">Contacts ({!v.numberOfContacts})</span>
+                    </h1>
+                </div>
+                <div class="slds-col slds-size_4-of-8">
+                    <div class="slds-form-element__control" style="text-align: right">
+                        <lightning:button class="slds-button_brand" label="{!$Label.c.cel_add_member}" onclick="{!c.addSelected}"/>
+                        <lightning:button class="slds-button_brand" label="{!$Label.c.cel_create_target_list}" onclick="{!c.gotToReportController}" />
+                    </div>
+                </div>
+            </div>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_2-of-8">
+                    <div class="slds-form-element__control">
+                        <p class="title">{!$Label.c.cel_EnterAName}</p>
+                        <ui:inputText aura:id="filtName" value="{!v.filtName}" Placeholder="{!$Label.c.cel_EnterAName}" />
+                    </div>
+                </div>
+                <div class="slds-col slds-size_2-of-8">
+                    <div class="slds-form-element__control">
+                        <p class="title">{!$Label.c.cel_EnterACustomerCode}</p>
+                        <ui:inputText aura:id="filtCustomerCode" value="{!v.filtCustomerCode}" Placeholder="{!$Label.c.cel_EnterACustomerCode}" />
+                    </div>
+                </div>
+                <div class="slds-col slds-size_4-of-8">
+                    <div class="slds-form-element__control ">
+                        <p class="title">&nbsp;</p>
+                        <lightning:button class="slds-button_brand" label="{!$Label.c.cel_search}" onclick="{!c.getContactsList}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br></br>
+        <div class="slds-p-horizontal_small hllo">
+            <!-- The Resuls :)-->
+            <table class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal" height="400px;">
+                <thead>
+                    <tr class="slds-text-title_caps">
+                        <th class="slds-cell-shrink" scope="col">
+                            <ui:inputCheckbox aura:id="checkboxAll" value="{!v.isSelectAll}" change="{!c.handleSelectAllContact}" />
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Close Date">{!$Label.c.cel_Name}
+                                <button class="slds-button slds-button_icon slds-button_icon" title="Sort">
+                                    <span class="slds-assistive-text">Sort</span>
+                                </button>
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Account Name">{!$Label.c.cel_CustomerCode}
+                                <button class="slds-button slds-button_icon slds-button_icon" title="Sort">
+                                    <span class="slds-assistive-text">Sort</span>
+                                </button>
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Account Name">{!$Label.c.cel_account_segment}
+                                <button class="slds-button slds-button_icon slds-button_icon" title="Sort">
+                                    <span class="slds-assistive-text">Sort</span>
+                                </button>
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Close Date">{!$Label.c.cel_Phone}
+                                <button class="slds-button slds-button_icon slds-button_icon" title="Sort">
+                                    <span class="slds-assistive-text">Sort</span>
+                                </button>
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Stage">{!$Label.c.cel_Email}
+                                <button class="slds-button slds-button_icon slds-button_icon" title="Sort">
+                                    <span class="slds-assistive-text">Sort</span>
+                                </button>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:if isTrue="{!not(empty(v.contactList))}">
+                            <aura:iteration items="{!v.contactList}" var="contact">
+                                <tr class="slds-hint-parent">
+                                    <td class="slds-cell-shrink" data-label="Select Row">
+                                        <ui:inputCheckbox aura:id="checkBox" text="{!contact.Id}" />
+                                    </td>
+                                    <td scope="row" data-label="Name">
+                                        <div class="slds-truncate">{!contact.Name}</div>
+                                    </td>
+                                    <td data-label="Account CustomerCode">
+                                        <div class="slds-truncate">{!contact.cel_ext_account_id__c}</div>
+                                    </td>
+                                    <td data-label="Account Segment">
+                                        <div class="slds-truncate">{!contact.cel_segment_value_label__c}</div>
+                                    </td>
+                                    <td data-label="Phone">
+                                        <div class="slds-truncate">{!contact.PersonHomePhone}</div>
+                                    </td>
+                                    <td data-label="Email">
+                                        <div class="slds-truncate">{!contact.cel_PersonEmail__c} </div>
+                                    </td>
+                                </tr>
+                            </aura:iteration>
+                        <aura:set attribute="else">
+                            <tr class="slds-hint-parent">
+                                <td class="slds-cell-shrink" colspan="6" style="text-align : center">
+                                    {!$Label.c.cel_no_data_found}
+                                </td>
+                            </tr>
+                        </aura:set>
+                    </aura:if>
+                    
+                </tbody>
+            </table>
+        </div>
+        <!-- List of contacts :)-->
+    </div>
+</aura:component>
